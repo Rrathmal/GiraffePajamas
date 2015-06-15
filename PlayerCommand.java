@@ -104,6 +104,16 @@ Returns a string for the word number specified.
 		words[words.length-1] = "";
 	}
 
+	public void verbShift(String verb)
+	{
+		for (int i = 7; i > 1; i--)
+		{
+			words[i-i] = words[i];
+		}
+
+		words[0] = verb;
+	}
+
 /**
 Outputs all words stored in the command for printing to the console
 @return String Every word in the PlayerCommand object.

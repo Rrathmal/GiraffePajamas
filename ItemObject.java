@@ -29,7 +29,7 @@ public class ItemObject
 		try
 		{
 			file = new File("ITEMS.txt");
-			input = new Scanner(file);
+			input = new Scanner(file, "UTF-8");
 
 			for (int i = 0; i < objectNumber * FIELDS; i++)
 			{
@@ -88,7 +88,7 @@ This was for the old (STATES) system. I don't know if I need it anymore.
 		try
 		{
 			file = new File("ITEMS.txt");
-			input = new Scanner(file);
+			input = new Scanner(file, "UTF-8");
 
 			for (int i = 0; i < objectNumber * FIELDS; i++)
 			{

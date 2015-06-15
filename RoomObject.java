@@ -27,7 +27,7 @@ public class RoomObject
 		try
 		{
 			file = new File("LISA.txt");
-			input = new Scanner(file);
+			input = new Scanner(file, "UTF-8");
 			exits = new int[DIRECTIONS];
 
 			//Skips to the room entry
@@ -105,7 +105,7 @@ public class RoomObject
 		try
 		{
 			file = new File("LISA.txt");
-			input = new Scanner(file);
+			input = new Scanner(file, "UTF-8");
 
 			//Skips to the room entry
 			for (int i = 0; i < roomNumber * FIELDS; i++)

@@ -1,9 +1,9 @@
-0
+﻿0
 test room
 A room to test / break shit. The whole environment is very... imaginary.
 -1:-1:-1:-1:0:0:0:0:
 
-0
+1
 guest bedroom
 One of the spare bedrooms in The Thunderdome.@@ The room is extravagantly decorated top to bottom with everything you would expect from a bourgeois merchant.@@ Now if only the wealth put into this room wasn't nailed to the ground.@@ Along the north wall is a dresser and wardrobe set, in compliment with the night stand in the corner.@@ On the east wall sits a bed next to two windows, and a small table sits nearby in the other corner.@@ The only door leading in or out of this room is on the west wall, and it leads back to the hallway.
 -4:-4:-4:-4:-4:-4:-4:0:

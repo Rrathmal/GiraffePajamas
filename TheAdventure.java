@@ -76,6 +76,7 @@ public class TheAdventure
 						break;
 				case "2": input_error = 1;
 						newStart.newPlayer(player);
+						player[1] = 1;
 						break;
 				case "3": input_error = 1;
 						loadGame();
@@ -392,7 +393,7 @@ error messages if it's not valid.
 	{
 		File file = new File(filename);
 		boolean valid = validSave(filename);
-		Scanner thisSave = new Scanner(file);
+		Scanner thisSave = new Scanner(file, "UTF-8");
 
 		//Pattern p = Pattern.compile("(\\d+\n){255,}");
 
@@ -447,7 +448,7 @@ error messages if it's not valid.
 	public static boolean validSave(String filename) throws IOException
 	{
 		File file = new File(filename);
-		Scanner input = new Scanner(file);
+		Scanner input = new Scanner(file, "UTF-8");
 		int count = 0;
 		boolean valid = false;
 
@@ -494,7 +495,7 @@ error messages if it's not valid.
 		try
 		{
 			file = new File("ITEMS.txt");
-			input = new Scanner(file);
+			input = new Scanner(file, "UTF-8");
 			String lineParse;
 
 			int i = 0;

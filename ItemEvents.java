@@ -20,7 +20,7 @@ public class ItemEvents extends Commands
 		try
 		{
 			file = new File("FLUFF.txt");
-			input = new Scanner(file);
+			input = new Scanner(file, "UTF-8");
 
 
 			for (int i = 0; i < ((event*3)+2); i++)

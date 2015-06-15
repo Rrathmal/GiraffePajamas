@@ -685,10 +685,123 @@ public class Commands extends TheAdventure
 	Finds an item number based upon the given alias by the user.
 	@param PlayerCommand The processed input from the user
 	@return Int The item number that the command corresponds too.
+
+	Version 2
+
 	*/
 	public static int itemLookup(PlayerCommand god)
 	{
 		int itemNumber = -1;
+		int wordCount = 1;
+		int match = 0;
+		int tempArray[] = new int[200];
+		String itemName = "";
+
+		if (god.getWord(1).equals(""))
+		{
+			return 0;
+		}
+
+		for (int i = 2; i < 5; i++)
+		{
+			if (god.getWord(i).equals("") || god.getWord(i).equals("with") || god.getWord(i).equals("on"))
+			{
+				i = 5;
+			}else
+			{
+				wordCount++;
+			}
+		}
+
+		while (match < 1)
+		{
+
+			if (debug)
+			says ("match " + match + " wordcount " + wordCount);
+
+			for (int i = 0; i < wordCount; i++)
+			{
+				itemName += god.getWord(i+1);
+				if (i+1 < wordCount)
+				{
+					itemName += " ";
+				}
+			}
+
+			for (int i = 0; i < itemAliases.length; i++)
+			{
+				if (itemAliases[i].contains(itemName))
+				{
+					if (match == 0)
+					{
+						itemNumber = i;
+						tempArray[match] = i;
+					}else
+					{
+						tempArray[match] = i;
+					}
+					match++;
+				}
+			}
+
+			if (match > 1)
+			{
+				//If there are multiple matches...
+				String output = "You'll have to be more specific, do you mean ";
+				ItemObject temp;
+
+				for (int i = 0; i < match; i++)
+				{
+					temp = new ItemObject(tempArray[i], player);
+					output += temp.getName();
+
+					if (i+2 < match)
+					{
+						output += ", ";
+					}else if (i+1 < match)
+					{
+						output += "', or";
+					}else
+					{
+						output += "?";
+					}
+				}
+
+				says(output);
+
+				output = keyboard.nextLine();
+
+				PlayerCommand recursiveLoop = new PlayerCommand(output);
+				recursiveLoop.verbShift(god.getWord(0));
+
+				itemNumber = itemLookup(recursiveLoop);
+
+
+			}else if (match == 1)
+			{
+				for (int i = 1; i < wordCount; i++)
+				{
+					god.setWord(1, itemName);
+					god.wordShift(2);
+				}
+			}
+
+			wordCount--;
+
+		}
+
+		return itemNumber;
+
+	}
+	/*
+
+	Old itemLookup command.
+
+	public static int itemLookup(PlayerCommand god)
+	{
+		int itemNumber = -1;
+		int aliasMatch = 0;
+		int[] matches = new int[ITEMS];
 		String second = god.getWord(1);
 		String third = god.getWord(2);
 		String fourth = god.getWord(3);
@@ -697,7 +810,57 @@ public class Commands extends TheAdventure
 		{
 			if (itemAliases[i].contains(second))
 			{
-				itemNumber = i;
+				if (aliasMatch < 1)
+				{
+					itemNumber = i;
+					matches[aliasMatch] = i;
+				}else
+				{
+					matches[aliasMatch] = i;
+				}
+				aliasMatch++;
+			}
+		}
+
+		if (aliasMatch > 1)
+		{
+			int total_matches = aliasMatch;
+			aliasMatch = 0;
+			ItemObject temp;
+
+			for (int i = 0; i < total_matches; i++)
+			{
+				if (player[player[10]+matches[i]] == thisRoom.getNumber() || (player[player[10]+matches[i]] < 0 && player[player[10]+matches[i]] > -5))
+				{
+					matches[aliasMatch] = matches[i];
+					aliasMatch++;
+				}
+			}
+
+			if (aliasMatch == 1)
+			{
+				itemNumber = matches[0];
+			}else if (aliasMatch > 1)
+			{
+				String output = "You'll have to be more specific, do you mean ";
+
+				for (int i = 0; i < aliasMatch; i++)
+				{
+					temp = new ItemObject(matches[i], player);
+					output += temp.getName();
+					if (i+2 < aliasMatch)
+					{
+						output += ", ";
+					}else if (i+1 < aliasMatch)
+					{
+						output += "', or";
+					}else
+					{
+						output += ".";
+					}
+				}
+
+				aliasMatch = -1;
 			}
 		}
 
@@ -711,9 +874,56 @@ public class Commands extends TheAdventure
 				{
 					god.wordShift(1);
 					god.setWord(1, second);
-					return i;
+					itemNumber = i;
+					matches[aliasMatch] = i;
+				}else
+				{
+					matches[aliasMatch] = i;
+				}
+				aliasMatch++;
 				}
 			}
+		if (aliasMatch > 1)
+		{
+			int total_matches = aliasMatch;
+			aliasMatch = 0;
+			ItemObject temp;
+
+			for (int i = 0; i < total_matches; i++)
+			{
+				if (player[player[10]+matches[i]] == thisRoom.getNumber() || (player[player[10]+matches[i]] < 0 && player[player[10]+matches[i]] > -5))
+				{
+					matches[aliasMatch] = matches[i];
+					aliasMatch++;
+				}
+			}
+
+			if (aliasMatch == 1)
+			{
+				itemNumber = matches[0];
+			}else if (aliasMatch > 1)
+			{
+				String output = "You'll have to be more specific, do you mean ";
+
+				for (int i = 0; i < aliasMatch; i++)
+				{
+					temp = new ItemObject(matches[i], player);
+					output += temp.getName();
+					if (i+2 < aliasMatch)
+					{
+						output += ", ";
+					}else if (i+1 < aliasMatch)
+					{
+						output += "', or";
+					}else
+					{
+						output += ".";
+					}
+				}
+			}
+		}
+
+
 		}
 		if (!(fourth.equals("")))
 		{
@@ -735,6 +945,8 @@ public class Commands extends TheAdventure
 
 		return itemNumber;
 	}
+
+	*/
 
 
 	/**

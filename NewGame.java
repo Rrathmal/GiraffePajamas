@@ -18,7 +18,7 @@ public class NewGame
 		player[6] = 1; 	//Number of belts worn.
 		player[7] = 2; 	//Number of boots worn.
 		player[8] = 0; 	//Number of hats worn.
-		player[9] = 0;	//
+		player[9] = 0;	//Items flipped
 
 		l(player[10]);  //ITEM OFFSET
 		l(player[11]); 	//SPECIAL OFFSET
@@ -49,7 +49,7 @@ public class NewGame
 		*/
 
 		player[20] = -1;	//Player. If this isn't set to -1 or , half of the use commands break.
-		player[21] = 0;		//This Chair 	: Test Room
+		player[21] = 200;		//This Chair 	: Test Room
 		player[22] = 3; 	//Leather Belt	: Test Room
 		player[23] = -1;	//Dagger
 		player[24] = 2;		//Lockpick

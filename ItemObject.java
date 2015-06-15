@@ -204,6 +204,11 @@ This was for the old (STATES) system. I don't know if I need it anymore.
 			itemFlag = player[player[10]+number];
 		}
 
+		if (itemFlag == -1)
+		{
+			itemFlag = 0;
+		}
+
 		return Math.abs(itemFlag);
 	}
 

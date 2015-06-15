@@ -100,6 +100,12 @@ public class ItemEvents extends Commands
 		String[] events = readEvent(rawEvent);
 		int eventCount = 0;
 
+		if (debug)
+		{
+			says("events length = " + events.length);
+			says("itemEvent: Item number: " + item);
+		}
+
 		/*
 
 		System.out.println("RAW EVENT: " + rawEvent);
@@ -109,48 +115,58 @@ public class ItemEvents extends Commands
 
 		if (debug)
 		{
+			String output = "Events: ";
+
 			for (int i = 0; i < events.length; i++)
 			{
-				says("Events " + i + ": " + events[i]);
+				output += events[i] + " ";
 			}
+
+			says(output);
 		}
 
 		for (int i = 0; i < events.length; i++)
 		{
 			if (events[i].equals("i"))
 			{
-				if (player[Integer.parseInt(events[i+1])] == player[Integer.parseInt(events[i+2])])
-				{
-					i += 2;
-				}else
-				{
-					//i = events.length;
-					while (!(events[i].equals("i")) && i < events.length)
-					{
-						i++;
-					}
+				int first = player[Integer.parseInt(events[i+1])];
+				int second;
 
-					if (events[i].equals("i"))
-					{
-						i--;
-					}
-				}
-			}else if(events[i].equals("T"))
-			{
-
-				if (Integer.parseInt(events[i+1]) == item)
+				if (events[i+2].equals("l"))
 				{
+					second = player[Integer.parseInt(events[i+3])];
 					i++;
 				}else
 				{
-					while (!(events[i].equals("T") && i < events.length))
+					second = player[Integer.parseInt(events[i+2])];
+				}
+
+
+				if (first == second)
+				{
+					if (debug)
+						says("match");
+
+					i += 2;
+				}else
+				{
+					while (i+1 < events.length && !( ( events[i+1].equals("i") ) || ( events[i+1].equals("T") ) ) )
 					{
+						if (debug)
+							says("skip event " + i + ": " + events[i]);
+
 						i++;
 					}
+				}
 
-					if (events[i].equals("T"))
+			}else if(events[i].equals("T"))
+			{
+
+				if (!(Integer.parseInt(events[i+1]) == item))
+				{
+					while ((i+1 < events.length) && !(events[i+1].equals("T")))
 					{
-						i--;
+						i++;
 					}
 				}
 
@@ -269,17 +285,25 @@ public class ItemEvents extends Commands
 			temp[i] = "";
 		}
 
+		/*
+
+		This is an old debug line used for file reads. Due to spam, it's been disabled.
+
 		if (debug)
 		{
 			says("EVENT STRING: " + eventString + "\n");
 		}
 
+		*/
+
 		for (int i = 0; i < eventString.length(); i++)
 		{
+			/*
 			if (debug)
 			{
 			says("EVENTSTRING: " + eventString.charAt(i));
 			}
+			*/
 
 			if (eventString.charAt(i) == ' ')
 			{
@@ -289,10 +313,12 @@ public class ItemEvents extends Commands
 				temp[actions] += eventString.charAt(i);
 			}
 
+			/*
 			if (debug)
 			{
 			says("STORED AT ACTION " + actions + " : " + temp[actions]);
 			}
+			*/
 		}
 
 
@@ -307,10 +333,20 @@ public class ItemEvents extends Commands
 	}
 
 	/**
-
+	Checks an items custom verb list to see if the verb presented is present. Displays an error if it is not.
+	@param String The verb to check for.
+	@param ItemObject
+	@param ItemObject
 	*/
 	public static void itemVerbEvents (String verb, ItemObject arrow, ItemObject target)
 	{
+		if (debug)
+		{
+			says("Debug Lookup:\n-----------------------\n");
+			says("Arrow: \n\n" + arrow.toString());
+			says("Target: \n\n" + target.toString());
+		}
+
 		String[][] verbEventArray = arrow.getVerbEvents();
 
 		int verbLocation = -1;

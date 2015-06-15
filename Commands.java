@@ -68,6 +68,9 @@ public class Commands extends TheAdventure
 			}
 
 			use(god);
+		}else if(first.equals("flip"))
+		{
+			flip(god);
 		}else
 		{
 			says("Command unrecognized: " + first);
@@ -283,7 +286,7 @@ public class Commands extends TheAdventure
 
 		first = itemLookup(god);
 
-		if (first >= 0 && getState(first) < 2)
+		if (first >= 0 && getState(first) < 5)
 		{
 			arrow = new ItemObject(first, player);
 
@@ -327,14 +330,13 @@ public class Commands extends TheAdventure
 				{
 					if (state == 1)
 					{
-						says("You first flip the " + target.getName() + " back over." +
-								 " Reflecting upon your actions, you regret nothing.");
-						player[(player[10]+arrow.getNumber())] -= 100;
-					}
-
-					for(int i = 0; i < useEvents.length; i++)
+						says("You would, but, you already flipped the shit out of it. You'll have to flip it back over first.\n\nYes, it's silly, but so was flipping it over in the first place.");
+					}else
 					{
-						ItemEvents.itemEvent(useEvents[i], target.getNumber());
+						for(int i = 0; i < useEvents.length; i++)
+						{
+							ItemEvents.itemEvent(useEvents[i], target.getNumber());
+						}
 					}
 				}
 
@@ -352,6 +354,50 @@ public class Commands extends TheAdventure
 		}else
 		{
 			says("I don't understand what " + god.getWord(1) + " is.");
+		}
+	}
+
+	/**
+	The flip command
+	@param PlayerCommand ""
+	*/
+	public static void flip(PlayerCommand god)
+	{
+		ItemObject arrow;
+		int first;
+
+		first = itemLookup(god);
+
+		if (first >= 0)
+		{
+			arrow = new ItemObject(first, player);
+
+			if (arrow.getState() != 1)
+			{
+				if (arrow.getState() == 3)
+				{
+					says("In \"another\" fit of anger, you flip the " + arrow.getName() + " over. Although it made little difference, as it still lays in pieces.");
+				}else if(arrow.getState() != 5)
+				{
+					says("You grab the " + arrow.getName() + " and flip it's shit. YYYEEEEEEEAAAAAAAHHHHHH!!!!!");
+					player[arrow.p()] = thisRoom.getNumber() + 100;
+					player[9]++;
+				}
+			}else
+			{
+				if(arrow.isType("i") || arrow.isType("p"))
+				{
+					player[arrow.p()] = thisRoom.getNumber();
+				}else if (arrow.isType("f"))
+				{
+					player[arrow.p()] = thisRoom.getNumber() + 200;
+				}else if (arrow.isType("l"))
+				{
+					player[arrow.p()] = thisRoom.getNumber() + 400;
+				}
+
+				says("You calmly pick the " + arrow.getName() + " back up, and place it into it's original location. Looking back: the whole ordeal was very therapudic.");
+			}
 		}
 	}
 
@@ -712,6 +758,11 @@ public class Commands extends TheAdventure
 			itemFlag = player[player[10]+itemFlag];
 		}
 
+		if (itemFlag == -1)
+		{
+			itemFlag = 0;
+		}
+
 		return Math.abs(itemFlag);
 	}
 
@@ -730,6 +781,11 @@ public class Commands extends TheAdventure
 		}else
 		{
 			itemFlag = player[player[10]+item.getNumber()];
+		}
+
+		if (itemFlag == -1)
+		{
+			itemFlag = 0;
 		}
 
 		return Math.abs(itemFlag);
@@ -795,5 +851,7 @@ public class Commands extends TheAdventure
 		return comparison;
 
 	}
+
+
 
 }

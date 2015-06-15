@@ -62,16 +62,19 @@ public class RoomObject
 			{
 				tempValue = player[i];
 
-				while (tempValue >= 100)
+				if (tempValue != -2 && !(tempValue >=200 && tempValue < 300))
 				{
-					tempValue-=100;
-				}
+					while (tempValue >= 100)
+					{
+						tempValue-=100;
+					}
 
 
-				if (tempValue == number)
-				{
-					tempItems[numItems] = i - player[10];
-					numItems++;
+					if (tempValue == number)
+					{
+						tempItems[numItems] = i - player[10];
+						numItems++;
+					}
 				}
 			}
 
@@ -150,12 +153,12 @@ public class RoomObject
 
 			for (int i = 0; i < totalItems; i++)
 			{
-				ItemObject temp = new ItemObject(items[i]);
+				ItemObject temp = new ItemObject(items[i], player);
 
 				if(getState(items[i]) < 5)
 				{
 					output += temp.getName();
-					if(getState(temp.getNumber()) == 2)
+					if(getState(temp.getNumber()) == 1)
 					{
 						output += " (Flipped)";
 					}else if(getState(temp.getNumber()) == 3)
@@ -180,8 +183,15 @@ public class RoomObject
 			}
 		}else if (totalItems == 1)
 		{
-			ItemObject temp = new ItemObject(items[0]);
-			output += temp.getName();
+			ItemObject temp = new ItemObject(items[0], player);
+
+			if (temp.getState() != 2)
+			{
+				output += temp.getName();
+			}else
+			{
+				output = "";
+			}
 		}else
 		{
 			output = "";

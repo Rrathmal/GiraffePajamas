@@ -1,4 +1,23 @@
 /**
+Alex Hinchliffe
+
+2015
+
+Alright, so! This program is a WiP text based adventure client that I'm making in my spare time, mostly just for the point of proving to myself that I can do it.
+The main goal is to make something functional as I go along, but it's bound to be all sorts of messy because of that. My main goal is to make something that I can
+use again, not necessarily something that is easy for a user to pick up.
+
+Completion status: 50%
+
+That's a rough estimate, and quite honestly based upon nothing but gut instinct.
+
+
+Checklist of things to be done:
+
+- Proper Save and Load (They're both "There", but I wrote them so early into the program that I don't know if they still work)
+- "help" command
+
+
 */
 
 import java.util.Scanner;
@@ -36,6 +55,8 @@ public class TheAdventure
 		String input;
 		int input_error = 0;
 
+		//Sets the Offset constants to the player array.
+		//This is necessary for almost every location related command.
 		player[10] = STATS;
 		player[11] = STATS + ITEMS;
 		player[12] = STATS + ITEMS + SPECIAL;
@@ -103,53 +124,61 @@ public class TheAdventure
 
 			}else
 			{
-				switch (input_error)
-				{
-				case 0: says("Unspecified error. If you're getting this error, then I'm sorry to say that I have absolutely no idea what you did wrong, nor how you managed to get this error. So congradulations to you, and god speed.");
-						break;
-				case -1: switch (blank_count)
-						{
-						case 0: says("Invalid command. Because, you know, you didn't actually enter one");
-								blank_count++;
-								break;
-						case 1: says("Invalid command. Yep, you still haven't typed anything.");
-								blank_count++;
-								break;
-						case 2: says("Invalid command. Ok, so you hit enter. That doesn't count though.");
-								blank_count++;
-								break;
-						case 3: says("\nValid command.                                                                    \n\nNah, just kidding. It's still an invalid command.");
-								blank_count++;
-								break;
-						case 6: says("How do you like it when I type nothing?");
-								blank_count++;
-								break;
-						case 9: says("Comgrabulations! You've won! As it turns out, the secret was just pressing enter!");
-								blank_count++;
-								break;
-						case 20: says("...are you still there?");
-								blank_count++;
-								break;
-						default: says(">");
-								blank_count++;
-								break;
-						}
-						break;
-				case -2: says("Command too long. Whatever you're doing, you're doing it wrong. Last I checked there wasn't a single combination of words that is NEARLY as long as what you just tried. I mean, " + input.length() + " characters long. Really man?");
-						break;
-				case -3: says("Too many spaces. Stahp plz.");
-						break;
-				case -4: says("None of that, uhh, whatever that is!");
-						break;
-				case -5: says("Invalid command. Please type more than one space.");
-						break;
-				case -6: says("To many words! Whatever youre trying to say could probably be shortened a bit.");
-						break;
-				}
+				errorCheck(input_error);
+
 			}
 		}
 
 		/**/
+	}
+
+	public static void errorCheck(int input_error)
+	{
+		switch (input_error)
+		{
+		case 0: says("Unspecified error. If you're getting this error, then I'm sorry to say that I have absolutely no idea what you did wrong, nor how you managed to get this error. So congradulations to you, and god speed.");
+				break;
+
+		case -1: switch (blank_count)
+				{
+				case 0: says("Invalid command. Because, you know, you didn't actually enter one");
+						blank_count++;
+						break;
+				case 1: says("Invalid command. Yep, you still haven't typed anything.");
+						blank_count++;
+						break;
+				case 2: says("Invalid command. Ok, so you hit enter. That doesn't count though.");
+						blank_count++;
+						break;
+				case 3: says("\nValid command.                                                                    \n\nNah, just kidding. It's still an invalid command.");
+						blank_count++;
+						break;
+				case 6: says("How do you like it when I type nothing?");
+						blank_count++;
+						break;
+				case 9: says("Comgrabulations! You've won! As it turns out, the secret was just pressing enter!");
+						blank_count++;
+						break;
+				case 20: says("...are you still there?");
+						blank_count++;
+						break;
+				default: says(">");
+						blank_count++;
+						break;
+				}
+				break;
+
+		case -2: says("Command too long. Whatever you're doing, you're doing it wrong. Last I checked there wasn't a single combination of words that is NEARLY as long as what you just tried. Like, damn.");
+				break;
+		case -3: says("Too many spaces. Stahp plz.");
+				break;
+		case -4: says("None of that, uhh, whatever that is!");
+				break;
+		case -5: says("Invalid command. Please type more than one space.");
+				break;
+		case -6: says("To many words! Whatever youre trying to say could probably be shortened a bit.");
+				break;
+		}
 	}
 
 /**
@@ -202,6 +231,11 @@ error messages if it's not valid.
 		int charCount = 0;
 		char[] charText = text.toCharArray();
 
+		if (debug)
+		{
+			text_speed = 0;
+		}
+
 		for(int i = 0; i < charText.length; i++)
 		{
 			if (charCount < 78)
@@ -246,6 +280,11 @@ error messages if it's not valid.
 		}
 
 		System.out.println("\n");
+
+		if (debug)
+		{
+			text_speed = 0;
+		}
 	}
 
 

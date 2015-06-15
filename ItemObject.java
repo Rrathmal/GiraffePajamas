@@ -192,17 +192,28 @@ This was for the old (STATES) system. I don't know if I need it anymore.
 				4 - Locked
 				5 - Innaccessable
 	*/
-	public int getState(int itemFlag)
+	public int getState()
 	{
-		if (player[player[10]+itemFlag] >= 0)
+		int itemFlag = -6;
+
+		if (player[player[10]+number] >= 0)
 		{
-			itemFlag = player[player[10]+itemFlag] / 100;
+			itemFlag = player[player[10]+number] / 100;
 		}else
 		{
-			itemFlag = player[player[10]+itemFlag];
+			itemFlag = player[player[10]+number];
 		}
 
 		return Math.abs(itemFlag);
+	}
+
+	/**
+	Returns the location of the item in the player array as an int.
+	@return int The player array location value.
+	*/
+	public int p()
+	{
+		return player[10]+number;
 	}
 
 	public String toString()
@@ -231,7 +242,7 @@ This was for the old (STATES) system. I don't know if I need it anymore.
 
 		output += "\nState: ";
 
-		switch (getState(number))
+		switch (getState())
 		{
 			case 1: output += "Flipped. (If not in inventory)";
 					break;

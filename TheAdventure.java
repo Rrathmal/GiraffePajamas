@@ -40,7 +40,7 @@ public class TheAdventure
 		player[11] = STATS + ITEMS;
 		player[12] = STATS + ITEMS + SPECIAL;
 
-		says("1) New Game 2) Load 3) TEST Save 4) boatcat\n");
+		says("1) New Game 2) New Game (No Intro) 3) Load 4) boatcat\n");
 		System.out.print(">");
 
 		input = keyboard.nextLine();
@@ -54,10 +54,10 @@ public class TheAdventure
 						ItemEvents.displayEvent(11, 12, 13, 14);
 						break;
 				case "2": input_error = 1;
-						loadGame();
+						newStart.newPlayer(player);
 						break;
 				case "3": input_error = 1;
-						saveGame();
+						loadGame();
 						break;
 				case "4": debug = true;
 						says("Debug mode activated");

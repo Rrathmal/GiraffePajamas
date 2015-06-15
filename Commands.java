@@ -41,7 +41,12 @@ public class Commands extends TheAdventure
 			go(god);
 		}else if (first.equals("attack") || first.equals("break") || first.equals("smash") || first.equals("fbdc") || first.equals("slay") || first.equals("destroy") || first.equals("annihilate"))
 		{
-			customVerb("attack", god);
+			//If the item does not contain a custom attack message, this will display the default "break" actions.
+
+			if (customVerb("attack", god))
+			{
+				attack(god);
+			}
 		}else if (first.equals("shoot") || first.equals("throw") || first.equals("toss") || first.equals("giveat"))
 		{
 			customVerb("throw", god);
@@ -300,7 +305,7 @@ public class Commands extends TheAdventure
 				second = itemLookup(god);
 			}
 
-			says("DEBUG: Second: " + second);
+			// says("DEBUG: Second: " + second);
 
 			if (second >= 0)
 			{
@@ -403,12 +408,13 @@ public class Commands extends TheAdventure
 	@param String The verb name.
 	@param PlayerCommand The processed player input.
 	*/
-	public static void customVerb(String verb, PlayerCommand god)
+	public static boolean customVerb(String verb, PlayerCommand god)
 	{
 		ItemObject arrow;
 		ItemObject target;
 		int firstItem = -1;
 		int secondItem = -1;
+		boolean invalid = true;
 
 		says();
 
@@ -482,6 +488,7 @@ public class Commands extends TheAdventure
 				if (secondItem >= 0)
 				{
 					ItemEvents.itemVerbEvents(verb, arrow, target);
+					invalid = false;
 				}
 			}else
 			{
@@ -491,6 +498,8 @@ public class Commands extends TheAdventure
 		{
 			says("You're angry, I get that. But no matter how hard you try you can't " + verb + " " + god.getWord(1) + " because it doesn't exist!");
 		}
+
+		return invalid;
 	}
 
 	/**
@@ -737,6 +746,35 @@ public class Commands extends TheAdventure
 		says("I understood what you were saying, up until " + thisWord + ". Other than that though, I got nothing.");
 	}
 
+	/**
+	The default attack command. Sets an items state to broken and displays a message if a custom command wasn't already found.
+	@param PlayerCommand blahblahblah
+	*/
+	public static void attack(PlayerCommand god)
+	{
+		ItemObject target;
+		int firstItem = -1;
+
+		firstItem = itemLookup(god);
+
+		if(firstItem >= 0)
+		{
+			target = new ItemObject(firstItem, player);
+			int loc = target.getLocation();
+
+			if (loc < 500 && loc > -5)
+			{
+				says("While it takes a bit of effort on your end, you attack and break the " + target.getName() + ". Nice job hero.");
+				player[target.p()] = thisRoom.getNumber()+300;
+			}
+		}
+	}
+
+	/**
+	Checks to see if an item is in the current room, or the players inventory.
+	@param ItemObject The ItemObject for the item being checked.
+	@return int The locational difference between the two.
+	*/
 	public static int compareLocation(ItemObject item)
 	{
 		int location = item.getLocation();

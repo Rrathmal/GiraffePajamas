@@ -44,7 +44,7 @@ public class ItemEvents extends Commands
 		}
 	}
 
-/**
+	/**
 	Outputs and event to the console based upon the given event
 	number.
 	@param Int The event number
@@ -91,6 +91,7 @@ public class ItemEvents extends Commands
 	/**
 	Takes an event string and a target item number and prossess
 	any events associated with the two.
+	SEE ITEMS.txt for command definitions.
 	@param String The raw event string.
 	@param Int The number of the item that's being used as a target.
 	*/
@@ -128,9 +129,32 @@ public class ItemEvents extends Commands
 					{
 						i++;
 					}
+
+					if (events[i].equals("i"))
+					{
+						i--;
+					}
+				}
+			}else if(events[i].equals("T"))
+			{
+
+				if (Integer.parseInt(events[i+1]) == item)
+				{
+					i++;
+				}else
+				{
+					while (!(events[i].equals("T") && i < events.length))
+					{
+						i++;
+					}
+
+					if (events[i].equals("T"))
+					{
+						i--;
+					}
 				}
 
-			}else if (events[i].equals("e") && item == Integer.parseInt(events[i-1]))
+			}else if (events[i].equals("e"))
 			{
 				int eventNumber = Integer.parseInt(events[i+1]);
 
@@ -142,7 +166,7 @@ public class ItemEvents extends Commands
 				displayEvent(eventNumber);
 				i++;
 				eventCount++;
-			}else if (events[i].equals("p") && item == Integer.parseInt(events[i-1]))
+			}else if (events[i].equals("p"))
 			{
 				player[Integer.parseInt(events[i+1])] = Integer.parseInt(events[i+2]);
 				i += 2;
@@ -160,7 +184,7 @@ public class ItemEvents extends Commands
 
 				i += 2;
 				eventCount++;
-			}else if (events[i].equals("d") && item == Integer.parseInt(events[i-1]))
+			}else if (events[i].equals("d"))
 			{
 				ItemObject tempItem = new ItemObject(item, player);
 				int location = tempItem.getLocation();
@@ -181,25 +205,34 @@ public class ItemEvents extends Commands
 				}
 
 				eventCount++;
-			}else if (events[i].equals("b") && item == Integer.parseInt(events[i-1]))
+			}else if (events[i].equals("b"))
 			{
 				if (player[player[10]+Integer.parseInt(events[i+1])] < 0)
 				{
 					player[player[10]+Integer.parseInt(events[i+1])] = thisRoom.getNumber();
+				}else
+				{
+
+					//If the break command doesn't work, this is the reason why.
+					//I'm pretty sure I need this, but honestly I forget.
+					while (player[(player[10]+Integer.parseInt(events[i+1]))] >= 100)
+					{
+						player[(player[10]+Integer.parseInt(events[i+1]))] -= 100;
+					}
 				}
 
 				player[(player[10]+Integer.parseInt(events[i+1]))]+= 300;
 
-			}else if (events[i].equals("t") && item == Integer.parseInt(events[i-1]))
+			}else if (events[i].equals("t"))
 			{
 				text_speed = player[Integer.parseInt(events[i+1])];
 				i++;
-			}else if (events[i].equals("c") && item == Integer.parseInt(events[i-1]))
+			}else if (events[i].equals("c"))
 			{
 				player[Integer.parseInt(events[i+2])] = player[Integer.parseInt(events[i+1])];
 				i+=2;
 				eventCount++;
-			}else if (events[i].equals("u") && item == Integer.parseInt(events[i-1]))
+			}else if (events[i].equals("u"))
 			{
 				if (player[(player[10]+item)] < 0)
 				{

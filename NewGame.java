@@ -25,6 +25,7 @@ public class NewGame
 		l(player[12]);	//EXITS OFFSET
 
 		player[13] = 15;//Text speed
+		player[14] = 22;//Event text speed
 
 		/*
 

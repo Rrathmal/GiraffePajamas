@@ -1,0 +1,83 @@
+0
+Dio Brando
+;me;dio;dio brando;self;asshole;chris;taylor;player; 
+Dio Brando, the ruthless asshole that's hellbent on killing every innocent person in his path as well as everyone else in the way. Likes walks on volcanic beaches, killing, and logs. Hates dogs, and main characters.
+p
+0 e 3:
+:attack:
+:0 e 4:
+
+1
+this chair
+;chair;this chair;sitting device;butt stool;
+This chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair 
+i
+0 e 1 0 p 260 0 0 p 261 1 0 p 262 2 0 p 263 3
+:attack:
+:0 c 13 0 p 13 30 0 t 13 0 e 9 0 b 1 0 t 0 0 c 0 13:
+
+2
+leather belt
+;leather belt;l belt;4strength4stam belt;aww dude;waist thing;processed animal remains
++4 Strength +4 Stamina Leather belt.
+i
+0 e 1
+:equip:
+:
+
+3
+throwing dagger
+;dagger;throwing knife;stabby device;pointy end;rabbit slayer;bladefest 2015
+A trusty sidearm used for cutting and throwing alike.
+i
+0 e 1
+:throw:
+:0 e 5:
+
+4
+lockpick
+;lockpick;lock-pick;lock pick;
+An assortment of lock-picking tools that can be used to open locks (sometimes).
+i
+0 e 6 5 e 10 5 u 5
+:attack:throw:
+:0 e 7 0 p 24 -3:0 e 8 0 d::
+
+5
+test lock box
+;lbox;locked box;lb;
+A locked box.
+i
+0 e 6
+:attack:
+:0 e 6:
+
+
+
+//Number
+//Name
+//Aliases
+//Description
+//Type
+//Use Options
+//Commands list
+//Commands (Untouched)
+//Commands (Flipped)
+//Commands (Broken)
+//Commands (Gone)
+
+//Command syntax
+//e - event (e 1) -> (Display event 1)
+//p - change player flag (p 1 10) -> (player[1] = 10)
+//i - if    (i 100 5 e 1) -> (if (player[100] = 5) the command is processed) 
+
+		Item locations read as such:
+		-1 inventory,
+		0-97 Map location,
+		98 space,
+		99 inventory (broken),
+		100+ Map Location (Flipped)
+		200+ Map Location (Stationary)
+		300+ Map Location (Broken)
+		400+ Map Location (Locked)
+		500+ Map Location (Non-accessable)

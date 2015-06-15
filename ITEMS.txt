@@ -38,7 +38,7 @@ T 0 e 1
 lockpick
 ;lockpick;lock-pick;lock pick;
 An assortment of lock-picking tools that can be used to open locks (sometimes).
-l
+i
 T 0 e 6 T 5 e 10 u 5
 :attack:throw:
 :T 0 e 7 p 24 -3:T 0 e 8 d::
@@ -47,7 +47,7 @@ T 0 e 6 T 5 e 10 u 5
 test lock box
 ;lbox;locked box;lb;
 A locked box.
-i
+l
 T 0 e 6
 :attack:
 :T 0 e 6:

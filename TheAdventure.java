@@ -15,10 +15,11 @@ That's a rough estimate, and quite honestly based upon nothing but gut instinct.
 Checklist of things to be done:
 
 - Proper Save and Load (They're both "There", but I wrote them so early into the program that I don't know if they still work)
-- "help" command
+- Combat class, which processes actual combat.
+- Equipment
 
 + DONE Change itemLookup to function with arrays REDO ENTIRELY
-
++ DONE "help" command
 
 
 */
@@ -45,9 +46,13 @@ public class TheAdventure
 	public static final int SPECIAL = 40;
 	public static final int EXITS = 60;
 
+	public static final int ENDINGS = 20;
+	public static final int ACHIEVEMENTS = 30;
+
 	public static int FLAGS = STATS+ITEMS+SPECIAL+EXITS;
 
 	public static int[] player = new int[FLAGS];
+	public static int[] player2 = new int[ENDINGS+ACHIEVEMENTS];
 	public static String[] itemAliases = new String[ITEMS];
 
 	public static NewGame newStart = new NewGame(FLAGS);
@@ -58,6 +63,8 @@ public class TheAdventure
 		PlayerCommand test;
 		String input;
 		int input_error = 0;
+
+		loadSession();
 
 		//Sets the Offset constants to the player array.
 		//This is necessary for almost every location related command.
@@ -80,7 +87,7 @@ public class TheAdventure
 						break;
 				case "2": input_error = 1;
 						newStart.newPlayer(player);
-						player[1] = 0; 						//Starting Room
+						player[1] = 1; 						//Starting Room
 						break;
 				case "3": input_error = 1;
 						loadGame();
@@ -119,6 +126,8 @@ public class TheAdventure
 			if (input_error > 0)
 			{
 				god = new PlayerCommand(input);
+
+				player[player[11]+0]++;					//Increases Commands entered by one.
 
 				Commands.lookup();
 
@@ -238,11 +247,6 @@ error messages if it's not valid.
 		int charCount = 0;
 		char[] charText = text.toCharArray();
 
-		if (debug)
-		{
-			text_speed = 0;
-		}
-
 		for(int i = 0; i < charText.length; i++)
 		{
 			if (charCount < 78)
@@ -278,7 +282,8 @@ error messages if it's not valid.
 					pressAnyKeyToContinue();
 				}else
 				{
-					Thread.sleep(text_speed);
+					if(!debug)
+						Thread.sleep(text_speed);
 					System.out.print(text.charAt(i));
 				}
 			}
@@ -288,10 +293,6 @@ error messages if it's not valid.
 
 		System.out.println("\n");
 
-		if (debug)
-		{
-			text_speed = 0;
-		}
 	}
 
 
@@ -311,13 +312,6 @@ error messages if it's not valid.
 	{
 		thisRoom = new RoomObject(player[1], player);
 		says(thisRoom.toString());
-
-		if (debug)
-		{
-			says("Room: " + thisRoom.getNumber() + " " + thisRoom.getName());
-			says(thisRoom.getDescription());
-			says("Exits " + thisRoom.readExits());
-		}
 	}
 	/**
 	Lists, verifies, and attempts to load player values from a file.
@@ -545,4 +539,117 @@ error messages if it's not valid.
 			System.out.println("Press enter to continue...");
 	        keyboard.nextLine();
  	}
+
+ 	private static void loadSession()
+ 	{
+
+		try
+		{
+			File file = new File(".session");
+			Scanner input = new Scanner(file);
+
+			input.nextLine();
+
+			for (int i = 0; i < player2.length && input.hasNext(); i++)
+			{
+				player2[i] = input.nextInt();
+				input.nextLine();
+			}
+
+			input.close();
+
+
+		}catch (IOException e)
+		{
+			try
+			{
+				PrintWriter output = new PrintWriter(".session");
+
+				for (int i = 0; i < player2.length; i++)
+				{
+					player2[i] = 0;
+					output.println(player2[i]);
+				}
+
+				output.close();
+
+			}catch (FileNotFoundException f)
+			{
+				says("Unable to create session save file. Is the game directory write protected or some garbage?");
+			}
+		}
+	}
+
+	public static void displaySession()
+	{
+		int line = 0;
+		String output = "";
+		Scanner input;
+		File file;
+
+		try
+		{
+			file = new File("SESSION.txt");
+			input = new Scanner(file);
+			output += "Lets take a look, shall we...\n\nEndings:\n\n";
+
+			for (int i = 0; i < ENDINGS; i++)
+			{
+
+				output+= "\t" + (i+1) + ": ";
+
+				if (player2[i] == 1)
+				{
+					output += input.nextLine();
+				}else
+				{
+					output += "??????";
+					input.nextLine();
+				}
+
+				if(line == 0)
+				{
+					output += "\t";
+					line++;
+				}else
+				{
+					output += "\n";
+					line = 0;
+				}
+			}
+
+			output += "\nAchievements:\n\n";
+
+			for (int i = ENDINGS; i < player2.length; i++)
+			{
+
+				output+= "\t" + (i-ENDINGS+1) + ": ";
+
+				if (player2[i] == 1)
+				{
+					output += input.nextLine();
+				}else
+				{
+					output += "??????";
+					input.nextLine();
+				}
+
+				if(line == 0)
+				{
+					output += "\t";
+					line++;
+				}else
+				{
+					output += "\n";
+					line = 0;
+				}
+			}
+
+			says(output);
+
+		}catch (IOException e)
+		{
+			says("File not found SESSION.txt");
+		}
+	}
 }

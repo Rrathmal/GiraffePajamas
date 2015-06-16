@@ -55,12 +55,21 @@ public class NewGame
 		}
 
 		player[20] = -1;	//Player. If this isn't set to -1 or , half of the use commands break.
-		player[21] = 200;		//This Chair 	: Test Room
-		player[22] = 3; 	//Leather Belt	: Test Room
-		player[23] = -1;	//Dagger
-		player[24] = 2;		//Lockpick
+		player[21] = 200;	//This Chair 	: Test Room
+		player[22] = 2; 	//Leather Belt	: Test Room
+		player[23] = -1;	//Dagger		: Inv
+		player[24] = -1;	//Lockpick		: Inv
 		player[25] = 400;	//Locked box	: Test Room
 		player[26] = 0;		//Mystery		: Test Room
+		player[27] = -5;	//"Longsword"	: N/A
+		player[28] = 201;	//GR Dresser	: Guest Room
+		player[29] = 201;	//GR Wardrobe	: Guest Room
+		player[30] = 201;	//GR Nightstand	: Guest Room
+		player[31] = 201;	//GR Bed		: Guest Room
+		player[32] = 201;	//GR Table		: Guest Room
+		player[33] = 501;	//Maid			: Guest Room
+		player[34] = 501;	//Dead maid D:  : Guest Room
+		player[35] = 201;	//GR Chair		: Guest Room
 
 		/*
 
@@ -72,6 +81,8 @@ public class NewGame
 		Refer to comments for use.
 
 		*/
+
+		player[220] = 0;	//Number of Commands entered.
 
 		/*
 
@@ -88,8 +99,8 @@ public class NewGame
 
 		*/
 
-		player[260] = -2;	//Room 0 exit up: 	Room 0
-		player[261] = -2;	//
+		player[260] = -2;	//Room 0 exit up: 	Room 0	: Universal null exit
+		player[261] = 2;	//GuestBedroom 	: West exit
 		player[262] = -2;	//
 		player[263] = -2;	//
 		player[264] = -2;	//

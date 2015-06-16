@@ -58,6 +58,51 @@ with an address and his loose schedule. With another hand greased you nail yours
 // NEWGAMETEXT - 4
 Standing up you replace your cloths and take inventory of your belongings. Everything is accounted for, save the one sleeping draught you snuck her in between a kiss. She now lays past out on the guest bed, and you're free to go about your work.@@@@\n\nYOUR MISSION: To kill Jessepeak Thunderdome and escape\n\nRestrictions: None, you are Dio Brando.\n\nAnd that all starts now...\n\n^\n\n
 
+15
+// Use guest room dresser
+You have a better chance of Dio getting a 9-5 desk job then him using a dresser
+
+16
+// Use guest room wardrobe
+I mean, I guess you could hide in it if you were ever being chased by giant blue monsters, but that's about all you can think to use it for.
+
+17
+// Use guest room nightstand
+Forget the nightstand! It's below you!
+
+18
+// Use guest room bed
+You've already used it plenty. Plus, there's someone still on it...
+
+19
+// Use maid (no longsword)
+You already have! Plus, you just got done grabbing all your gear you dropped.
+
+20
+// Use maid (longsword)
+She is asleep, so you mine as we--SPLIT YOUR LUNGS WITH BLOOD AND THUNDER, WHEN YOU SEE THE WHITE WHALE!@@@@\n\nBREAK YOUR BACKS AND CRACK YOUR OARS, MEN, IF YOU WISH TO PREVAIL!@@@@\n\nTHIS IVORY LEG IS WHAT PROPELS ME, HARPOONS THRUST IN THE SKY.\n\nAIM DIRECTLY FOR HIS CROOKED BROW AND LOOK HIM STRAIGHT IN THE EEEEYE!!!!@@@@\n\nWHITE@@     WHALE@@@@@\nHOLY@@     GRAIL!!@@@@@@@@@\n@@@@@@@@@\n@@@@@@@@Well that was nice.@@@@@
+
+21
+// Use guest room table
+Not much you can do with that. Not unless you find a pack of cards and a few dogs. Scratch that, no dogs. You hate dogs.
+
+22
+// Throw maid (You're a mean one, Mr Dio)
+You pick up the helpless body of the maid and throw her to the ground!\n\n@T@H@U@D@!\n\nShe rolls for a bit before coming to a resting state. While not overjoyed, this does give Dio a small amount of satisfaction. Sick bastard.
+
+23
+// Nope
+Nope.
+
+24
+// Kill Them
+Taking out your dagger you break into a dash towards them, catching them by surprise and ending their life fast with your expert killy skills. \n\nThat's all the description you get, as I don't quite approve of Dio's deplorable actions! OOC
+
+25
+// Use guest room chair
+You sit down in the chair.\n\nAnd then you stand back up because you have a mission to do.
+
+
 
 
 

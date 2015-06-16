@@ -2,7 +2,7 @@
 Dio Brando
 ;me;dio;dio brando;self;asshole;chris;taylor;player; 
 Dio Brando, the ruthless asshole that's hellbent on killing every innocent person in his path as well as everyone else in the way. Likes walks on volcanic beaches, killing, and logs. Hates dogs, and main characters.
-s
+f
 T 0 i 0 0 e 3 i 0 3 e 2 i 0 13 e 9 T 1 e 3
 :attack:
 :T 0 e 4:
@@ -45,7 +45,7 @@ T 0 e 6 T 5 e 10 u 5
 
 5
 test lock box
-;lbox;locked box;lb;mysterious test box;
+;test lock box;lbox;locked box;lb;mysterious test box;
 A locked box.
 l
 T 0 e 6
@@ -54,12 +54,103 @@ T 0 e 6
 
 6
 mysterious test object
-;mystery;mysterious test object;
+;mysterious test object;mystery;mysterious test object;
 A theoretical object with no form. How mysterious!
 i
 T 99
 :null:
 null
+
+7
+dio's "longsword"
+;longsword;dio's longsword;dios longsword;dio longsword;ponos
+I don't want to talk about this...
+f
+T 0
+:null:
+null
+
+8
+guest room dresser
+;dresser;
+A rather ornate wooden dresser. Whoever made the drawers must have been a true artist!
+f
+T 0 e 15
+:null:
+null
+
+9
+guest room wardrobe
+;wardrobe;
+A rather ornate wooden wardrobe for storing larger pieces of cloths. You wonder what a peacedrobe would look like...
+f
+T 0 e 16
+:null:
+null
+
+10
+guest room nightstand
+;nightstand;
+A rather ornate wooden nightstand. Good for concealing weapons in case of an emergency, although you wonder why it's still being used in the day.
+f
+T 0 e 17
+:null:
+null
+
+11
+guest room bed
+;bed;
+A functionally comfortable 4-poster bed. You find the sheets to be unbearably gawdy. If anyone was to take a blacklight to the bed at this point, it might look like a Picasso.
+f
+T 0 e 18 s 13 0
+:null:
+null
+
+12
+guest room table
+;table;
+A
+f
+T 0 e 21
+:null:
+null
+
+13
+foreign maid
+;maid;
+A foreign maid that not only let a suspicious person, you, into her master abode, but also gave you a once over before your sleeping drought kicked in. Nice!
+p
+T 0 i 27 l -1 t 14 e 20 t 13 i 27 l -5 e 19 
+:throw:attack:
+:T 0 e 22 s 13 1: T 0 e 24 s 13 5 s 14 0
+
+14
+dead foreign maid
+;maid;
+The dead body of the foreign maid. She used to be alive once, but then you murdered her. Par for the course.
+p
+T 0 e 23
+:null:
+null
+
+15
+guest room chair
+;guest room chair;chair;
+An ornate wooden chair. You didn't have to go out on a leg to figure that out.
+f
+T 0 e 25
+:throw:
+T 0
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -82,13 +173,14 @@ null
 //d - drop (d)
 //u - unlock (Sets the state from LOCKED to either STATIONARY or NORMAL)
 //e - event display(e 1) -> (Displays event 1)
+//s - sets an items state(Makes an item visible) (s 1 0)
 // -------------
 //Value Commands
 // -------------
 //c - copy's one value to another (c 0 1) (c ORIGIN DESTINATION)
 //p - change player flag (0 p 1 10) -> (player[1] = 10)
 //h - health mod, + or - (h + 1) (Adds 1 hp)
-//t = sets the text speed (t 32)
+//t = sets the text speed (t 13) (text_speed = player[13]) (player[13] = Player selected speed, player[14] = Event speed)
 // ------------
 //Conditional Commands
 // ------------

@@ -33,7 +33,7 @@ public class RoomObject
 			//Skips to the room entry
 			for (int i = 0; i < roomNumber * FIELDS; i++)
 			{
-				System.out.println(input.nextLine());
+				input.nextLine();
 			}
 
 			//int number
@@ -147,7 +147,7 @@ public class RoomObject
 	public String getItems()
 	{
 		int totalItems = items.length;
-		String output = "\nYou see a ";
+		String output = "\n\nYou see a ";
 		if (totalItems >= 2)
 		{
 
@@ -185,7 +185,7 @@ public class RoomObject
 		{
 			ItemObject temp = new ItemObject(items[0], player);
 
-			if (temp.getState() != 2)
+			if (temp.getState() != 2 && temp.getState() != 5)
 			{
 				output += temp.getName();
 			}else
@@ -220,7 +220,7 @@ public class RoomObject
 
 	public String readExits()
 	{
-		String output = "\nObvious exits are ";
+		String output = "\n\nObvious exits are ";
 		String direction = "";
 		int totalExits = 0;
 
@@ -255,7 +255,7 @@ public class RoomObject
 
 		if(totalExits == 0)
 		{
-			output = "\nThere is no escape...";
+			output = "\n\nThere is no escape...";
 		}
 
 		return output;
@@ -275,8 +275,20 @@ public class RoomObject
 
 	public int getState(int itemFlag)
 	{
-		itemFlag = player[player[10]+itemFlag] / 100;
-		return itemFlag;
+		if (player[player[10]+itemFlag] >= 0)
+		{
+			itemFlag = player[player[10]+itemFlag] / 100;
+		}else
+		{
+			itemFlag = player[player[10]+itemFlag];
+		}
+
+		if (itemFlag == -1)
+		{
+			itemFlag = 0;
+		}
+
+		return Math.abs(itemFlag);
 	}
 
 

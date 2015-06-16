@@ -132,6 +132,23 @@ This was for the old (STATES) system. I don't know if I need it anymore.
 		return name;
 	}
 
+	public String getNameState()
+	{
+		String output = "";
+
+		switch (getState())
+		{
+			case 1: output += " (Flipped)";
+					break;
+			case 3: output += " (Broken)";
+					break;
+			case 4: output += " (Locked)";
+					break;
+		}
+
+		return name + output;
+	}
+
 	public String getDescription()
 	{
 		return description;

@@ -1,0 +1,23 @@
+﻿//The help file! Reads the top line and prints anything else that follows.
+h-
+The help command!\n\nCorrect syntax >>>help [COMMAND]\n\n[COMMAND] - is a necessary parameter.\n{COMMAND} is an optional parameter.
+h-help
+How does one help someone who can't be helped?\n\n@@@@@Help them anyway!\n\n@@@@@Try typing >>>help hints  for a few hints. Unless of course, you're against that.
+h-use
+Uses an item. If no target is specified the item will be used by itself.\n\nCorrect syntax >>>use [ITEM] {on,with} {ITEM}
+h-me
+Erin! Erin! Tasukete Erin!
+h-look
+Examines the current area or an item if specified. Not to be confused with search.\n\nCorrect syntax >>>look {ITEM}
+h-tacos
+I really, really agree.
+h-dio
+He doesn't need my help. Nor do I want to give him it.
+h-children
+Dio doesn't do that...
+h-chris
+That's out of character!
+h-delirious
+The cheat / debug command.
+h-picasso
+A famouse painter for his god awful works including "Shit I smeared on a board" and "Oops. I tripped". Everyone knows this guy.

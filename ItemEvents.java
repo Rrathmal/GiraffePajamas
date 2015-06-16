@@ -135,7 +135,7 @@ public class ItemEvents extends Commands
 
 				if (events[i+2].equals("l"))
 				{
-					second = player[Integer.parseInt(events[i+3])];
+					second = Integer.parseInt(events[i+3]);
 					i++;
 				}else
 				{
@@ -273,6 +273,27 @@ public class ItemEvents extends Commands
 				}
 				i++;
 				eventCount++;
+			}else if (events[i].equals("s"))
+			{
+				int offset = Integer.parseInt(events[i+2]);
+				int itemLocation = player[player[10]+Integer.parseInt(events[i+1])];
+				ItemObject temp = new ItemObject(Integer.parseInt(events[i+1]), player);
+
+				if (itemLocation < 0)
+				{
+					offset *= -1;
+
+					player[player[10]+Integer.parseInt(events[i+1])] = offset;
+
+				}else
+				{
+					offset = offset*100;
+
+					player[player[10]+Integer.parseInt(events[i+1])] = (itemLocation - (temp.getState()*100)) + offset;
+
+				}
+
+				i += 2;
 			}
 		}
 

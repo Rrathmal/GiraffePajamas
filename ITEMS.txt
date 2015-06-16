@@ -2,14 +2,14 @@
 Dio Brando
 ;me;dio;dio brando;self;asshole;chris;taylor;player; 
 Dio Brando, the ruthless asshole that's hellbent on killing every innocent person in his path as well as everyone else in the way. Likes walks on volcanic beaches, killing, and logs. Hates dogs, and main characters.
-p
+s
 T 0 i 0 0 e 3 i 0 3 e 2 i 0 13 e 9 T 1 e 3
 :attack:
 :T 0 e 4:
 
 1
 this chair
-;chair;this chair;sitting device;butt stool;
+;chair;this chair;sitting device;butt stool;test chair;
 This chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair 
 f
 T 0 e 1 p 260 0 p 261 1 p 262 2 p 263 3
@@ -32,7 +32,7 @@ A trusty sidearm used for cutting and throwing alike.
 i
 T 0 e 1
 :throw:
-:T 0 e 5:
+:T 0 e 5 h - 2:
 
 4
 lockpick
@@ -45,18 +45,21 @@ T 0 e 6 T 5 e 10 u 5
 
 5
 test lock box
-;lbox;locked box;lb;
+;lbox;locked box;lb;mysterious test box;
 A locked box.
 l
 T 0 e 6
 :attack:
 :T 0 e 6:
 
-
-
-
-
-
+6
+mysterious test object
+;mystery;mysterious test object;
+A theoretical object with no form. How mysterious!
+i
+T 99
+:null:
+null
 
 
 

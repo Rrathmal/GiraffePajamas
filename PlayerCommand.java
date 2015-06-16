@@ -64,6 +64,24 @@ public class PlayerCommand
 			words[i] = words[i].toLowerCase();
 			words[i] = words[i].replaceAll("^\"|\"$", "");
 		}
+
+		//Removes prepositions
+		for (int i = 1; i < words.length; i++)
+		{
+			if (words[i].equals("with")) //Any other reversal words go here.
+			{
+				String temp = words[i-1];
+
+				words[i-1] = words[i+1];
+				words[i+1] = temp;
+				wordShift(i);
+			}
+
+			if (words[i].equals("on") || words[i].equals("at")) //Any other combining words go here.
+			{
+				wordShift(i);
+			}
+		}
 	}
 
 /**
@@ -106,9 +124,9 @@ Returns a string for the word number specified.
 
 	public void verbShift(String verb)
 	{
-		for (int i = 7; i > 1; i--)
+		for (int i = 7; i > 0; i--)
 		{
-			words[i-i] = words[i];
+			words[i] = words[i-1];
 		}
 
 		words[0] = verb;

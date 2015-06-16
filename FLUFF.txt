@@ -1,45 +1,59 @@
 ﻿0
 //SPAAAAAAAAAAAAAACCCCCCCCCCCCEEEEEEEEEE
 You go to space.\nCongradulations! You're in space!\n\nAlex's note. This is the first ending I ever wrote for this game, and I think it's pretty suitable.\n\nEnding 0: I'm in space!\n
+
 1
 //This chair sit
 You sit in the chair.                                                                              This chair.                         This chair.                                                 This chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair this chair thi-- FUCK IT! You're now standing up.
+
 2
 //Default equip broken
 You can't equip that, it's broken! Well, I mean you could, but it's not going to do you much good.
+
 3
 //Use Dio Brando
 Yes, you plan to!
+
 4
 //Attack Dio
 You begin lambasting yourself with lengthy diatribes and uncouth utterances!\nIYou feel a little sadder for some reason...
+
 5
 //Throw dagger at Dio
 You carefully look yourself over, taking aim at your own foot. Closing one eye and minding not to bite your own tongue, you throw your dagger with all your might. The initial impact sends a chill up your whole leg as the dagger cuts cleanly past your boot drawing blood. Moreso than the pain, you feel a slight bit of regret, and maybe a bit of embarrassment if it wasn't for your amazing aim causing a bit of pride.\n\nYou lose 2 HP, and quickly retrieve your dagger so no one will notice.
+
 6
 //Default use space
 You can't use that by itself.
+
 7
 //Breaking lockick
 You break your lockpick. That'll keep those pickpocketing ninjas from being able to unlock your treasure!
+
 8
 //Throw it on the ground
 YOU THROW IT ON THE GROUND! BUDUBUDUBUDUBUDUBUDUBUDUBADAAADAADAAA
+
 9
 //Attack chair
 You inspect the chair...\n@@@@@@@@\n@@@@Removing your glasses you begin to see the once faint lines of death now exploding outwards with vivid energy.\n\n@@@Your head throbs, pulsating with every heartbeat. The lines invade your mind, reaching deeper and deeper after every beat...\n@@@@@@@@@\nbeat\n@@@@@@@@@\nbeat\n@@@@@@@@@\nbeat@@@@@@@@@@@@\n\nYou feel a strange heat welling up inside you, beckoning you, forcing you, controlling you.\n\n@@@Your hand reaches shackingly for your dagger. Gripping hard you focus on the chair.@@@@\n\nSLASH               SLASH\n     SLASH      SLASH\n              SLASH                     \n\n@@@You cut along the lines with violent precision.@@@The chair falls to the ground, breaking apart into multiple, clean cut, pieces. @@@With your head clearing and your mind at ease, you return to @@reality.@@@@
+
 10
 //Use lockpick on Locked Box
 You carefully place the lockpick in the box and begin to work your magic...\n\n@@@@*Click*@\n\nYou got it!@@ The locked box is now no longer!@@ Well, no longer locked.
+
 11
 // NEWGAMETEXT - 1
 You begin a new game...@@\n\nYour name is Dio Brando, and while others may know you as 'jerk' or 'asshole' or plethora of other expletives, you don't care. Because you're Dio Brando.\n\nCurrently, and without the knowledge of those lowly followers you call 'your party', you're currently in the middle of an what you believe to be an assassination mission.\n\n^\n\n\nA day ago, you delivered a note in the dead of night. It's contents were as mysterious as the circumstances surrounding it. The written side, clearly printed, read:\n\n    "Jessepeak Thunderdome III II"\n\nWhile the name itself, as absurd as the method derived, it was deadly serious to you, Dio Brando. For the symbol affixed to the corner of a black bird, meant the message itself, was a message of death.\n\n^\n\nSparing not a moment the following morning you made your way into town. While you did not recognize it, the first words 'Jessepeak Thunderdome' seemed obvious as to the name of your target. The other symbols '3' 
+
 12
 // NEWGAMETEXT - 2
 and '2' respectively remained in purpose unknown. Although a name was more than enough of a start.\n\nYou headed first to a nearby tavern. While off-hours might have been unorthodox, the barkeep recognized the name well enough.\n\n^\n\nJessepeak Thunderdome\n\nA rich merchant from Gorre that has since settled down in Dalraun for the purposes of business. Although much you hear is quite to the contrary, Jessepeak seems to be more concerned about his contributions to Dalraun as a while instead of making money. You heard stories of several recent public donations and acts of charity done by Jessepeak for the purpose of parks and property restoration. In doing so, he gained the reputation of being called "The rich merchant" around town.\n\n^\n\nThis matters not to you however. Be it a beggar or a guard, a mark is a mark, and you intend to follow through with the request regardless of the moral implications.\n\nWith the barkeeps stories and a bit of coins in the right hands, you come up 
+
 13
 // NEWGAMETEXT - 3
 with an address and his loose schedule. With another hand greased you nail yourself a rightful "appointment": at least by your standards.\n\n^\n\nThe following morning you make your way to the Thunderdome manor.\n\nYou head to the front door and give a light knock. Within moments a maid comes to the door to great you.\n\n"Good afternoon Sir, how may I be of assistance to you today?"\n\n^\n\n"I have a meeting with Jessepeak in about a half an hours time, is he by chance in at the moment? I'm in a quite a hurry"\n\n"I'm afraid he's away for business at this hour, but he'll be home soon." She says eying you up and down. "Or maybe, not that soon..."\n\nYou catch her drift, and although you might have left your plumber outfit back at the inn, you do believe this would be a good way to pass the time...\n\n^\n\n[]INSERT SMUT SCENE THAT I REFUSE TO WRITE HERE]@@@@\n\n
+
 14
 // NEWGAMETEXT - 4
 Standing up you replace your cloths and take inventory of your belongings. Everything is accounted for, save the one sleeping draught you snuck her in between a kiss. She now lays past out on the guest bed, and you're free to go about your work.@@@@\n\nYOUR MISSION: To kill Jessepeak Thunderdome and escape\n\nRestrictions: None, you are Dio Brando.\n\nAnd that all starts now...\n\n^\n\n

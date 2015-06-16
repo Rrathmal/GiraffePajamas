@@ -26,6 +26,9 @@ public class Commands extends TheAdventure
 		}else if (first.equals("look") || first.equals("examine") || first.equals("x") || first.equals("check"))
 		{
 			look();
+		}else if (first.equals("inventory") || first.equals("inv") || first.equals("bag") || first.equals("penis"))
+		{
+			inventory();
 		}else if (first.equals("use") || first.equals("bestow") || first.equals("apply") || first.equals("toggle") || first.equals("give"))
 		{
 			use();
@@ -73,6 +76,9 @@ public class Commands extends TheAdventure
 		}else if(first.equals("2+2"))
 		{
 			says("Nope.");
+		}else if(first.equals("achievements") || first.equals("endings") || first.equals("ending"))
+		{
+			displaySession();
 		}else
 		{
 			says("Command unrecognized: " + first);
@@ -190,9 +196,44 @@ public class Commands extends TheAdventure
 			{
 				says("Invalid value.");
 			}
+		}else if (second.equals("fillitems"))
+		{
+			fillItems();
 		}else
 		{
 			badRead(first);
+		}
+	}
+
+	/**
+	Command used for checking the players inventory. Currently, no seperate array is kept, so the whole player array is
+	read every time. This is only balanced by the fact that this command is only called when the player wishes.
+	*/
+	public static void inventory()
+	{
+		ItemObject item;
+		String output = "";
+		int items = 0;
+
+		says("You are currently carrying...\n");
+
+		for (int i = 1; i < ITEMS; i++) //Set to 1 to avoid cataloging the player.
+		{
+			if (player[player[10]+i] < 0 && player[player[10]+i] > -5)
+			{
+				item = new ItemObject(i, player);
+				output += "\t\t" + item.getNameState() + "\n";
+				items++;
+			}
+		}
+
+		if (items > 0)
+		{
+			says(output);
+		}else
+		{
+			says("Nothing.\n\nOh wow, really? Well, I guess that's not true...");
+			player[player[10]+7] = -1;
 		}
 	}
 
@@ -214,7 +255,7 @@ public class Commands extends TheAdventure
 			if (location < 0)
 			{
 				says("You drop the " + target.getName() + " and pick it up again. Yep, you already had it in your inventory.");
-			}else if (location == thisRoom.getNumber() || getState(itemNumber) != 5)
+			}else if (compareLocation(target) == 0 && getState(itemNumber) != 5 && (target.isType("i") || (target.isType("l"))))
 			{
 				if (getState(itemNumber) == 3)
 				{
@@ -224,14 +265,9 @@ public class Commands extends TheAdventure
 					stateOffset = -4;
 				}
 
-				if (getState(itemNumber) == 2)
-				{
-					says("You got deep pockets, but they aren't THAT deep.");
-				}else
-				{
-					says("You pickup the " + target.getName() + ".");
-					player[(player[10]+itemNumber)] = stateOffset;
-				}
+				says("You pickup the " + target.getNameState() + ".");
+				player[(player[10]+itemNumber)] = stateOffset;
+
 			}else
 			{
 				says("Try as you may, but I have no idea what you were trying to aquire there.");
@@ -322,9 +358,6 @@ public class Commands extends TheAdventure
 				}else if (state == 4)
 				{
 					says("It's locked. You need a key (or a \"KEY\").");
-				}else if (state == 5)
-				{
-					says("I don't understand what " + god.getWord(1) + " is. ");
 				}else
 				{
 					if (state == 1)
@@ -341,7 +374,7 @@ public class Commands extends TheAdventure
 
 			}else
 			{
-				says("I don't understand what " + god.getWord(1) + " is.");
+				says("I don't understand what " + god.getWord(2) + " is.");
 			}
 
 
@@ -353,6 +386,10 @@ public class Commands extends TheAdventure
 		}else
 		{
 			says("I don't understand what " + god.getWord(1) + " is.");
+			if (debug)
+			{
+				says(god.getWord(1) + " is in state: Inaccessable.");
+			}
 		}
 	}
 
@@ -467,7 +504,34 @@ public class Commands extends TheAdventure
 	*/
 	public static void help()
 	{
-		says();
+		File file;
+		Scanner input;
+		String readLine;
+		boolean read = false;
+
+		try
+		{
+			file = new File ("HALP.txt");
+			input = new Scanner(file, "UTF-8");
+
+			while(input.hasNext() && !read)
+			{
+				readLine = input.nextLine();
+				if (readLine.equals("h-" + god.getWord(1)))
+				{
+					says(input.nextLine());
+					read = true;
+				}else
+				{
+					input.nextLine();
+				}
+
+			}
+
+		}catch(IOException e)
+		{
+			says("Help! The help file is gone! I can't trust anyone anymore!");
+		}
 	}
 
 	/**
@@ -540,7 +604,7 @@ public class Commands extends TheAdventure
 	}
 
 	/**
-
+	The look command. Examines the surroundings unless an item parameter is specified by the user.
 	*/
 	public static void look()
 	{
@@ -572,11 +636,11 @@ public class Commands extends TheAdventure
 				{
 					case 1: says("You seem to have flipped it's shit. Good job keeping your cool.");
 							break;
+					case 2: says("It would be hard to move it from where it is.");
+							break;
 					case 3: says("It appears to be broken.");
 							break;
 					case 4: says("It appears to be locked.");
-							break;
-					case 5: says("You shouldn't be here...");
 							break;
 				}
 
@@ -652,8 +716,7 @@ public class Commands extends TheAdventure
 	}
 
 	/**
-	Looks up and prints the toString method for a given item in a PlayerComand
-	 ""
+	Looks up and prints the toString method for a given item in a PlayerCommand
 	*/
 	public static void itemInfo()
 	{
@@ -743,7 +806,7 @@ public class Commands extends TheAdventure
 
 			if (debug)
 			{
-				says(match + "matches found on the original search.");
+				says(match + " matches found on the original search.");
 			}
 
 			if (match > 1)
@@ -832,13 +895,22 @@ public class Commands extends TheAdventure
 
 			}else if (match == 1)
 			{
+
+				if (debug)
+					says("Single match item number: " + itemNumber);
+
 				for (int i = 1; i < wordCount; i++)
 				{
 					god.setWord(1, itemName);
 					god.wordShift(2);
-
-					return itemNumber;
 				}
+
+				return itemNumber;
+
+			}else
+			{
+				if (debug)
+					says("Match: " + match + " is < 1");
 			}
 
 			wordCount--;

@@ -48,19 +48,18 @@ public class NewGame
 
 		*/
 
-		//REMOVE THIS WHEN ALL ITEMS ARE SET
-		for (int i = 20; i < 220; i++)
-		{
-			player[i] = 98;
-		}
-
 		player[20] = -1;	//Player. If this isn't set to -1 or , half of the use commands break.
 		player[21] = 200;		//This Chair 	: Test Room
 		player[22] = 3; 	//Leather Belt	: Test Room
 		player[23] = -1;	//Dagger
 		player[24] = 2;		//Lockpick
 		player[25] = 400;	//Locked box	: Test Room
-		player[26] = 0;		//Mystery		: Test Room
+
+		//REMOVE THIS WHEN ALL ITEMS ARE SET
+		for (int i = 26; i < 220; i++)
+		{
+			player[i] = 98;
+		}
 
 		/*
 

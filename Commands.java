@@ -10,10 +10,11 @@ public class Commands extends TheAdventure
 	public static final int SPECIALOFFSEET = ITEMOFFSET + ITEMS;
 
 	/**
-	Takes the first word given by the user and tries to match it
+	Takes the first word given by the user and tries to mathc it
 	to a valid command.
+	@param PlayerCommand The processed player input.
 	*/
-	public static void lookup()
+	public static void lookup(PlayerCommand god)
 	{
 		String first = god.getWord(0);
 
@@ -22,36 +23,36 @@ public class Commands extends TheAdventure
 			exit();
 		}else if (first.equals("delirious"))
 		{
-			delirious();
+			delirious(god);
 		}else if (first.equals("look") || first.equals("examine") || first.equals("x") || first.equals("check"))
 		{
-			look();
+			look(god);
 		}else if (first.equals("use") || first.equals("bestow") || first.equals("apply") || first.equals("toggle") || first.equals("give"))
 		{
-			use();
+			use(god);
 		}else if (first.equals("get") || first.equals("take") || first.equals("steal") || first.equals("pocket") || first.equals("china") || first.equals("pickup"))
 		{
-			get();
+			get(god);
 		}else if (first.equals("help") || first.equals("?"))
 		{
-			help();
+			help(god);
 		}else if (first.equals("go") || first.equals("goto") || first.equals("walk") || first.equals("climb") || first.equals("jump"))
 		{
-			go();
+			go(god);
 		}else if (first.equals("attack") || first.equals("break") || first.equals("smash") || first.equals("fbdc") || first.equals("slay") || first.equals("destroy") || first.equals("annihilate"))
 		{
 			//If the item does not contain a custom attack message, this will display the default "break" actions.
 
-			if (customVerb("attack"))
+			if (customVerb("attack", god))
 			{
-				attack();
+				attack(god);
 			}
 		}else if (first.equals("shoot") || first.equals("throw") || first.equals("toss") || first.equals("giveat"))
 		{
-			toss();
+			customVerb("throw", god);
 		}else if (first.equals("drop"))
 		{
-			drop();
+			drop(god);
 		}else if (first.equals("sit"))
 		{
 			if (god.getWord(1).equals("on") || god.getWord(1).equals("in"))
@@ -66,13 +67,10 @@ public class Commands extends TheAdventure
 				god.setWord(1, "me");
 			}
 
-			use();
+			use(god);
 		}else if(first.equals("flip"))
 		{
-			flip();
-		}else if(first.equals("2+2"))
-		{
-			says("Nope.");
+			flip(god);
 		}else
 		{
 			says("Command unrecognized: " + first);
@@ -83,8 +81,9 @@ public class Commands extends TheAdventure
 	/**
 	DEBUG COMMAND. Command handler for when the first word from the
 	PlayerCommand is "delirious".
+	@param PlayerCommand The processed player input.
 	*/
-	public static void delirious()
+	public static void delirious(PlayerCommand god)
 	{
 		String first = "delirious";
 
@@ -104,11 +103,11 @@ public class Commands extends TheAdventure
 			says("Hella.");
 		}else if (second.equals("debug"))
 		{
-			debug = !debug;
+			debug = true;
 		}else if(second.equals("locate"))
 		{
 			god.wordShift(0);
-			int itemNumber = itemLookup();
+			int itemNumber = itemLookup(god);
 			if (itemNumber > 0)
 			{
 				String output = "";
@@ -167,7 +166,7 @@ public class Commands extends TheAdventure
 			}
 		}else if (second.equals("set"))
 		{
-			set();
+			set(god);
 		}else if (second.equals("read"))
 		{
 			try
@@ -179,7 +178,7 @@ public class Commands extends TheAdventure
 			}
 		}else if(second.equals("iteminfo"))
 		{
-			itemInfo();
+			itemInfo(god);
 		}else if(second.equals("go"))
 		{
 			try
@@ -198,12 +197,12 @@ public class Commands extends TheAdventure
 
 	/**
 	The get command!
-
+	@param PlayerCommand
 	*/
-	public static void get()
+	public static void get(PlayerCommand god)
 	{
 		ItemObject target;
-		int itemNumber = itemLookup();
+		int itemNumber = itemLookup(god);
 		int stateOffset = -1;
 
 		if (itemNumber >= 0)
@@ -246,8 +245,9 @@ public class Commands extends TheAdventure
 	/**
 	DEBUG COMMAND. Changes the player values to a specified value.
 	Does not reprint the area, and can easy screw alot of things up.
+	@param PlayerCommand The processed player input.
 	*/
-	public static void set()
+	public static void set(PlayerCommand god)
 	{
 		says();
 
@@ -273,8 +273,9 @@ public class Commands extends TheAdventure
 	Processes and handles any events stored in a ItemObject's
 	use field. Defaults to being used on 0 (The Player) if no
 	target is specified.
+	@param PlayerCommand The processed player input.
 	*/
-	public static void use()
+	public static void use(PlayerCommand god)
 	{
 		ItemObject arrow;
 		ItemObject target;
@@ -283,7 +284,7 @@ public class Commands extends TheAdventure
 
 		says();
 
-		first = itemLookup();
+		first = itemLookup(god);
 
 		if (first >= 0 && getState(first) < 5)
 		{
@@ -304,7 +305,7 @@ public class Commands extends TheAdventure
 				second = 0;
 			}else
 			{
-				second = itemLookup();
+				second = itemLookup(god);
 			}
 
 			// says("DEBUG: Second: " + second);
@@ -358,14 +359,14 @@ public class Commands extends TheAdventure
 
 	/**
 	The flip command
-	 ""
+	@param PlayerCommand ""
 	*/
-	public static void flip()
+	public static void flip(PlayerCommand god)
 	{
 		ItemObject arrow;
 		int first;
 
-		first = itemLookup();
+		first = itemLookup(god);
 
 		if (first >= 0)
 		{
@@ -400,35 +401,15 @@ public class Commands extends TheAdventure
 		}
 	}
 
-	public static void toss()
-	{
-		ItemObject arrow;
-		ItemObject target;
-		int itemNumber = itemLookup();
-
-
-		if (itemNumber >= 0)
-		{
-			arrow = new ItemObject(itemNumber, player);
-
-			if (arrow.hasVerb("throw"))
-			{
-				customVerb("throw");
-			}else
-			{
-				says("Oh you're strong. But you're not THAT strong.");
-			}
-		}
-	}
-
 	/**
 	The drop command!
+	@param PlayerCommand ""
 	*/
-	public static void drop()
+	public static void drop(PlayerCommand god)
 	{
 		ItemObject target;
 		int playerLocation = thisRoom.getNumber();
-		int itemNumber = itemLookup();
+		int itemNumber = itemLookup(god);
 		int stateOffset = 0;
 		int location;
 
@@ -437,7 +418,7 @@ public class Commands extends TheAdventure
 			target = new ItemObject(itemNumber, player);
 			location = target.getLocation();
 
-			if (location < 0 && !(target.isType("s")))
+			if (location < 0)
 			{
 				if(location == -3)
 				{
@@ -450,9 +431,6 @@ public class Commands extends TheAdventure
 				says("You drop the " + target.getName() + ".");
 				player[(player[10]+itemNumber)] = playerLocation + stateOffset;
 
-			}else if (target.isType("s"))
-			{
-				says("Unlike you, that's already quite grounded.");
 			}else
 			{
 				says("It's quite hard to drop something when you don't have it on your person.");
@@ -463,9 +441,9 @@ public class Commands extends TheAdventure
 
 	/**
 	Displays a help message based upon the player input.
-	 The processed player input.
+	@param PlayerCommand The processed player input.
 	*/
-	public static void help()
+	public static void help(PlayerCommand god)
 	{
 		says();
 	}
@@ -474,9 +452,9 @@ public class Commands extends TheAdventure
 	Processes and displays events for custom verbs (Anything besides use)
 	for an item.
 	@param String The verb name.
-	 The processed player input.
+	@param PlayerCommand The processed player input.
 	*/
-	public static boolean customVerb(String verb)
+	public static boolean customVerb(String verb, PlayerCommand god)
 	{
 		ItemObject arrow;
 		ItemObject target;
@@ -486,7 +464,24 @@ public class Commands extends TheAdventure
 
 		says();
 
-		firstItem = itemLookup();
+		for (int i = 0; i < 8; i++)
+		{
+			if (god.getWord(i).equals("with")) //Any other reversal words go here.
+			{
+				String temp = god.getWord(i-1);
+
+				god.setWord(i-1, god.getWord(i+1));
+				god.setWord(i+1, temp);
+				god.wordShift(i);
+			}
+
+			if (god.getWord(i).equals("on") || god.getWord(i).equals("at")) //Any other combining words go here.
+			{
+				god.wordShift(i);
+			}
+		}
+
+		firstItem = itemLookup(god);
 
 		if(firstItem >= 0)
 		{
@@ -504,13 +499,27 @@ public class Commands extends TheAdventure
 				{
 					target = new ItemObject(0, player);
 
-					secondItem = 0;
+					if (verb.equals("throw") && compareLocation(arrow) == 0)
+					{
+						int stateOffset = 0;
+						if (getState(arrow.getLocation()) == 3 || getState(arrow.getLocation()) == 4)
+						{
+							stateOffset = (getState(arrow.getLocation())) * 100;
+						}
+
+						says("You throw the " + arrow.getName() + ". While it gets some good distance, it eventually comes to rest on the floor.");
+						player[(player[10]+firstItem)] = thisRoom.getNumber()+stateOffset;
+						secondItem = -1;
+					}else
+					{
+						secondItem = 0;
+					}
 
 				}else
 				{
 
 					god.wordShift(0);
-					secondItem = itemLookup();
+					secondItem = itemLookup(god);
 					if(secondItem >= 0)
 					{
 						target = new ItemObject(secondItem, player);
@@ -542,7 +551,7 @@ public class Commands extends TheAdventure
 	/**
 
 	*/
-	public static void look()
+	public static void look(PlayerCommand god)
 	{
 		if (god.getWord(1).equals("at"))
 		{
@@ -559,7 +568,7 @@ public class Commands extends TheAdventure
 			buildRoom();
 		}else
 		{
-			int temp = itemLookup();
+			int temp = itemLookup(god);
 
 			if (temp >= 0 && getState(temp) != 5)
 			{
@@ -589,7 +598,7 @@ public class Commands extends TheAdventure
 	/**
 
 	*/
-	public static void go()
+	public static void go(PlayerCommand god)
 	{
 		says();
 		String second = god.getWord(1);
@@ -653,12 +662,12 @@ public class Commands extends TheAdventure
 
 	/**
 	Looks up and prints the toString method for a given item in a PlayerComand
-	 ""
+	@param PlayerCommand ""
 	*/
-	public static void itemInfo()
+	public static void itemInfo(PlayerCommand god)
 	{
 		god.wordShift(0);
-		int item = itemLookup();
+		int item = itemLookup(god);
 		ItemObject temp;
 
 		if (item >= 0)
@@ -674,13 +683,13 @@ public class Commands extends TheAdventure
 
 	/**
 	Finds an item number based upon the given alias by the user.
-	 The processed input from the user
+	@param PlayerCommand The processed input from the user
 	@return Int The item number that the command corresponds too.
 
 	Version 2
 
 	*/
-	public static int itemLookup()
+	public static int itemLookup(PlayerCommand god)
 	{
 		int itemNumber = -1;
 		int wordCount = 1;
@@ -695,7 +704,7 @@ public class Commands extends TheAdventure
 
 		for (int i = 2; i < 5; i++)
 		{
-			if (god.getWord(i).equals(""))
+			if (god.getWord(i).equals("") || god.getWord(i).equals("with") || god.getWord(i).equals("on"))
 			{
 				i = 5;
 			}else
@@ -704,9 +713,8 @@ public class Commands extends TheAdventure
 			}
 		}
 
-		while (match < 1 && wordCount > 0)
+		while (match < 1)
 		{
-			itemName = "";
 
 			if (debug)
 			says ("match " + match + " wordcount " + wordCount);
@@ -718,11 +726,6 @@ public class Commands extends TheAdventure
 				{
 					itemName += " ";
 				}
-			}
-
-			if (debug)
-			{
-				says("Beginning lookup for: " + itemName);
 			}
 
 			for (int i = 0; i < itemAliases.length; i++)
@@ -741,93 +744,37 @@ public class Commands extends TheAdventure
 				}
 			}
 
-			if (debug)
-			{
-				says(match + "matches found on the original search.");
-			}
-
 			if (match > 1)
 			{
-
-				if (debug)
-				{
-					says("Refining search...");
-				}
-
+				//If there are multiple matches...
+				String output = "You'll have to be more specific, do you mean ";
 				ItemObject temp;
-				int tempMatch = 0;
 
 				for (int i = 0; i < match; i++)
 				{
 					temp = new ItemObject(tempArray[i], player);
+					output += temp.getName();
 
-					if(compareLocation(temp) == 0 && temp.getState() != 5)
+					if (i+2 < match)
 					{
-						tempArray[tempMatch] = tempArray[i];
-						tempMatch++;
+						output += ", ";
+					}else if (i+1 < match)
+					{
+						output += "', or";
 					}else
 					{
-						match--;
+						output += "?";
 					}
-
 				}
 
-				if (debug)
-				{
-					says(match + " matches found in your location.");
-				}
+				says(output);
 
+				output = keyboard.nextLine();
 
-				if (match > 1)
-				{
-					//If there are multiple matches after checking location...
-					String output = "You'll have to be more specific, do you mean ";
+				PlayerCommand recursiveLoop = new PlayerCommand(output);
+				recursiveLoop.verbShift(god.getWord(0));
 
-					for (int i = 0; i < match; i++)
-					{
-						temp = new ItemObject(tempArray[i], player);
-						output += temp.getName();
-
-						if (i+2 < match)
-						{
-							output += ", ";
-						}else if (i+1 < match)
-						{
-							output += ", or ";
-						}else
-						{
-							output += "? ('cancel' to cancel.)";
-						}
-					}
-
-					says(output);
-
-					output = keyboard.nextLine();
-
-					if (!(output.equals("cancel")))
-					{
-						itemNumber = -1;
-						wordCount = 0;
-						match = 1;
-						String verb = god.getWord(0);
-
-						says(god.toString());
-
-						god = new PlayerCommand(verb + " " + output);
-
-						says(god.toString());
-
-						if (debug)
-							says("Recursion! New PlayerCommand " + god.toString());
-
-						itemNumber = itemLookup();
-
-					}else
-					{
-						itemNumber = -2;
-					}
-
-				}
+				itemNumber = itemLookup(recursiveLoop);
 
 
 			}else if (match == 1)
@@ -836,13 +783,10 @@ public class Commands extends TheAdventure
 				{
 					god.setWord(1, itemName);
 					god.wordShift(2);
-
-					return itemNumber;
 				}
 			}
 
 			wordCount--;
-
 
 		}
 
@@ -853,7 +797,7 @@ public class Commands extends TheAdventure
 
 	Old itemLookup command.
 
-	public static int itemLookup()
+	public static int itemLookup(PlayerCommand god)
 	{
 		int itemNumber = -1;
 		int aliasMatch = 0;
@@ -1072,13 +1016,14 @@ public class Commands extends TheAdventure
 
 	/**
 	The default attack command. Sets an items state to broken and displays a message if a custom command wasn't already found.
+	@param PlayerCommand blahblahblah
 	*/
-	public static void attack()
+	public static void attack(PlayerCommand god)
 	{
 		ItemObject target;
 		int firstItem = -1;
 
-		firstItem = itemLookup();
+		firstItem = itemLookup(god);
 
 		if(firstItem >= 0)
 		{
@@ -1118,6 +1063,7 @@ public class Commands extends TheAdventure
 		return comparison;
 
 	}
+
 
 
 }

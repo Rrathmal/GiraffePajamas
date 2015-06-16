@@ -23,7 +23,7 @@ public class ItemEvents extends Commands
 			input = new Scanner(file, "UTF-8");
 
 
-			for (int i = 0; i < ((event*4)+2); i++)
+			for (int i = 0; i < ((event*3)+2); i++)
 			{
 				if (debug)
 				{
@@ -64,7 +64,7 @@ public class ItemEvents extends Commands
 				input = new Scanner(file, "UTF-8");
 
 
-				for (int i = 0; i < ((events[j]*4)+2); i++)
+				for (int i = 0; i < ((events[j]*3)+2); i++)
 				{
 					if (debug)
 					{
@@ -81,7 +81,7 @@ public class ItemEvents extends Commands
 
 			}
 
-			says(eventCheck);
+			says(eventCheck.replaceAll("\\\\n", "\n"));
 
 		}catch(IOException e)
 		{
@@ -99,7 +99,6 @@ public class ItemEvents extends Commands
 	{
 		String[] events = readEvent(rawEvent);
 		int eventCount = 0;
-		boolean genericTarget = true;
 
 		if (debug)
 		{
@@ -162,26 +161,13 @@ public class ItemEvents extends Commands
 
 			}else if(events[i].equals("T"))
 			{
-				int targetItem;
 
-				if (events[i+1].equals("-1") && genericTarget)
-				{
-					targetItem = item;
-				}else
-				{
-					targetItem = (Integer.parseInt(events[i+1]));
-				}
-
-
-				if (!(targetItem == item))
+				if (!(Integer.parseInt(events[i+1]) == item))
 				{
 					while ((i+1 < events.length) && !(events[i+1].equals("T")))
 					{
 						i++;
 					}
-				}else
-				{
-					genericTarget = false;
 				}
 
 			}else if (events[i].equals("e"))

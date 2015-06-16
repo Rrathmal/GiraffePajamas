@@ -17,9 +17,6 @@ Checklist of things to be done:
 - Proper Save and Load (They're both "There", but I wrote them so early into the program that I don't know if they still work)
 - "help" command
 
-+ DONE Change itemLookup to function with arrays REDO ENTIRELY
-
-
 
 */
 
@@ -51,7 +48,6 @@ public class TheAdventure
 	public static String[] itemAliases = new String[ITEMS];
 
 	public static NewGame newStart = new NewGame(FLAGS);
-	public static PlayerCommand god;
 
 	public static void main (String[] args) throws IOException
 	{
@@ -80,7 +76,7 @@ public class TheAdventure
 						break;
 				case "2": input_error = 1;
 						newStart.newPlayer(player);
-						player[1] = 0; 						//Starting Room
+						player[1] = 1;
 						break;
 				case "3": input_error = 1;
 						loadGame();
@@ -118,13 +114,13 @@ public class TheAdventure
 
 			if (input_error > 0)
 			{
-				god = new PlayerCommand(input);
+				test = new PlayerCommand(input);
 
-				Commands.lookup();
+				Commands.lookup(test);
 
 				if (debug)
 				{
-					System.out.println("==== " + god.toString() + "====");
+					System.out.println("==== " + test.toString() + "====");
 				}
 
 			}else
@@ -230,8 +226,6 @@ error messages if it's not valid.
 	*/
 	public static void says(String text)
 	{
-
-		text = text.replaceAll("\\\\n", "\n");
 
 		System.out.print("");
 		int lastSpace = -1;

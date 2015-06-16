@@ -36,7 +36,7 @@ public class ItemObject
 				input.nextLine();
 			}
 
-			number = objectNumber;
+			number = input.nextInt();
 			input.nextLine();
 			name = input.nextLine();
 			input.nextLine(); //Skips the Aliases line
@@ -95,7 +95,7 @@ This was for the old (STATES) system. I don't know if I need it anymore.
 				input.nextLine();
 			}
 
-			number = objectNumber;
+			number = input.nextInt();
 			input.nextLine();
 			name = input.nextLine();
 			description = input.nextLine();
@@ -162,21 +162,6 @@ This was for the old (STATES) system. I don't know if I need it anymore.
 		}
 
 		return output;
-	}
-
-	public boolean hasVerb(String verb)
-	{
-		boolean valid = false;
-
-		for (int i = 0; i < verbs[0].length; i++)
-		{
-			if (verbs[0][i].equals(verb))
-			{
-				valid = true;
-			}
-		}
-
-		return valid;
 	}
 
 	public String getType()

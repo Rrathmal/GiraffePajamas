@@ -33,11 +33,11 @@ public class RoomObject
 			//Skips to the room entry
 			for (int i = 0; i < roomNumber * FIELDS; i++)
 			{
-				System.out.println(input.nextLine());
+				input.nextLine();
 			}
 
 			//int number
-			number = roomNumber;
+			number = input.nextInt();
 			input.nextLine();
 
 			//String name
@@ -114,7 +114,7 @@ public class RoomObject
 			}
 
 			//int number
-			number = roomNumber;
+			number = input.nextInt();
 			input.nextLine();
 
 			//String name
@@ -282,7 +282,7 @@ public class RoomObject
 
 	public String toString()
 	{
-		String output = ("You are in " + name + ".\n\n" + description + "." +
+		String output = ("You are in " + name + ".\n" + description + "." +
 						getItems() + readExits());
 
 		return output;

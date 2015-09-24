@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.Scanner;
-import java.util.regex.*;
+//import java.util.regex.*;
 
 public class ItemEvents extends Commands
 {
@@ -14,8 +14,6 @@ public class ItemEvents extends Commands
 		File file;
 		Scanner input;
 		String eventCheck;
-		String[] longEvent;
-		String temp;
 
 		try
 		{

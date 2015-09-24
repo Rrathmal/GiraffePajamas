@@ -14,6 +14,8 @@ public class RoomObject
 	private final int FIELDS = 5;
 	private final int DIRECTIONS = 8;
 	private final int[] player;
+	
+	private int visibleItems;
 
 	private int[] exits = new int[DIRECTIONS];
 
@@ -74,6 +76,12 @@ public class RoomObject
 					{
 						tempItems[numItems] = i - player[10];
 						numItems++;
+						ItemObject thisItem = new ItemObject(i-player[10], player);
+						
+						if (thisItem.getType() == "i")
+						{
+							visibleItems++;
+						}
 					}
 				}
 			}
@@ -146,7 +154,7 @@ public class RoomObject
 
 	public String getItems()
 	{
-		int totalItems = items.length;
+		int totalItems = visibleItems;
 		String output = "\n\nYou see a ";
 		if (totalItems >= 2)
 		{

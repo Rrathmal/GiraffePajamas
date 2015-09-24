@@ -252,26 +252,45 @@ This was for the old (STATES) system. I don't know if I need it anymore.
 	{
 		return player[10]+number;
 	}
+	
+	public boolean isHere()
+	{
+		boolean here = false;
+		int locationTEMP = location;
+		
+		while (locationTEMP >= 100)
+		{
+			locationTEMP-=100;
+		}
+		
+		if (locationTEMP == TheAdventure.thisRoom.getNumber() || locationTEMP == 0)
+		{
+			here = true;
+		}
+		
+		return here;
+	}
 
 	public String toString()
 	{
 		String output = "";
+		int locationTemp = location;
 
 		output += "Item Number: " + number + "\nItem Name: " + name +
 					"\nItem Type: " + type +
 					"\nItem Desciption: " + description +
 					"\n\nCurrent Location: ";
 
-		if (location >= 0)
+		if (locationTemp >= 0)
 		{
-			while (location >= 100)
+			while (locationTemp >= 100)
 			{
-				location -= 100;
+				locationTemp -= 100;
 			}
-			RoomObject tempRoom = new RoomObject(location);
+			RoomObject tempRoom = new RoomObject(locationTemp);
 
 			output +=  tempRoom.getName() + "\nRoom number: " +
-						location;
+						locationTemp;
 		}else
 		{
 			output += "Inventory.";

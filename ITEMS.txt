@@ -140,7 +140,7 @@ An ornate wooden chair. You didn't have to go out on a leg to figure that out.
 f
 T 0 e 25
 :throw:
-T 0
+T 0 
 
 
 

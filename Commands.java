@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.Scanner;
-import java.util.regex.*;
+//import java.util.regex.*;
 import java.lang.Math;
 
 public class Commands extends TheAdventure
@@ -199,6 +199,9 @@ public class Commands extends TheAdventure
 		}else if (second.equals("fillitems"))
 		{
 			fillItems();
+		}else if(second.equals("itemlist"))
+		{
+			itemList();
 		}else
 		{
 			badRead(first);
@@ -397,6 +400,33 @@ public class Commands extends TheAdventure
 	The flip command
 	 ""
 	*/
+	
+	private static void flip()
+	{
+		int itemNumber = itemLookup();
+		
+		
+		if (itemNumber > 0)
+		{
+			ItemObject table = new ItemObject(itemNumber, player);
+			if (table.isHere())
+			{
+				switch (getState(itemNumber))
+				{
+					case 0: says("You take a deep breath an --HHHGGGGRRRRAAAAAAGGGGGAAAHHHAHGAHGAGAHAAGAHGAAHAAAAAA!!!! You flip the living (or possibly not) beejesus's out of the " + table.getName() + ".\nYour RAGE has decreased by 1.");
+							player[player[player[10]+itemNumber]] = TheAdventure.thisRoom.getNumber()+100;
+							break;
+					case 1: says("You take a deep breath an --H@H@H@@@@@@@@@@@@@@ Oh wait a minute, @@@@@you already flipped this over.@@@@@Thinking calmly for a second, you take the " + table.getName() + " and set it back up.@@@@ Or set it to whatever a \"non-flipped\" position would be.");
+							player[player[player[10]+itemNumber]] = TheAdventure.thisRoom.getNumber()-100;
+							break;
+					case 2: 
+				}
+			}
+		}
+		
+	}
+	
+	/* Old code. Archived becasue I'm an idiot
 	public static void flip()
 	{
 		ItemObject arrow;
@@ -436,6 +466,8 @@ public class Commands extends TheAdventure
 			}
 		}
 	}
+	
+	*/
 
 	public static void toss()
 	{
@@ -1130,6 +1162,24 @@ public class Commands extends TheAdventure
 
 		return Math.abs(itemFlag);
 	}
+	
+	/**
+	 * Debug command which, against my better judgment, creates an item object for every available item and prints it's location.
+	 */
+	private static void itemList()
+	{
+		String output = "";
+		ItemObject objectItem;
+		
+		for (int i = player[10]; i < player[11] && player[i] != 98; i++)
+		{
+			objectItem = new ItemObject(i-player[10], player);
+			output+=objectItem.toString()+"\n\n";
+		}
+		
+		says(output);
+	}
+
 
 	/**
 	Displays a generic error message for when a word cannot be read

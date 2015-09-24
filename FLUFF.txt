@@ -102,6 +102,9 @@ Taking out your dagger you break into a dash towards them, catching them by surp
 // Use guest room chair
 You sit down in the chair.\n\nAnd then you stand back up because you have a mission to do.
 
+26
+// Throw Chair (RIOT END)
+
 
 
 

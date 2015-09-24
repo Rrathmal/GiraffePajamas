@@ -1,7 +1,6 @@
 public class PlayerCommand
 {
 	private String[] words = {"", "", "", "", "", "", "", ""};
-	private String modifier = "";
 	private int w_count;
 
 	public PlayerCommand (String input)

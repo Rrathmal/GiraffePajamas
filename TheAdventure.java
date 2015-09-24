@@ -26,7 +26,7 @@ Checklist of things to be done:
 
 import java.util.Scanner;
 import java.io.*;
-import java.util.regex.*;
+//import java.util.regex.*;
 import java.util.Random;
 
 public class TheAdventure
@@ -60,7 +60,6 @@ public class TheAdventure
 
 	public static void main (String[] args) throws IOException
 	{
-		PlayerCommand test;
 		String input;
 		int input_error = 0;
 
@@ -204,7 +203,6 @@ error messages if it's not valid.
 	private static int checkCommand (String input)
 	{
 		int error = 0;
-		char test = ' ';
 
 		if (input.length() == 0)
 		{

@@ -45,7 +45,7 @@ public class ItemEvents extends Commands
 	/**
 	Outputs and event to the console based upon the given event
 	number.
-	@param Int The event number
+	@param Int[] The events being played.
 	*/
 	public static void displayEvent(int... events)
 	{
@@ -371,8 +371,10 @@ public class ItemEvents extends Commands
 	@param ItemObject
 	@param ItemObject
 	*/
-	public static void itemVerbEvents (String verb, ItemObject arrow, ItemObject target)
+	public static boolean itemVerbEvents (String verb, ItemObject arrow, ItemObject target)
 	{
+		boolean valid = false;
+		
 		if (debug)
 		{
 			says("Debug Lookup:\n-----------------------\n");
@@ -394,14 +396,14 @@ public class ItemEvents extends Commands
 
 		if (verbLocation >= 0)
 		{
+			valid = true;
+			
 			String rawEvent = verbEventArray[1][verbLocation];
 
 			itemEvent(rawEvent, target.getNumber());
 
-		}else
-		{
-			says("While in your mind a " + arrow.getName() + " might be great to " + verb +
-					" with; this is earth, so it has no effect.");
 		}
+		
+		return valid;
 	}
 }

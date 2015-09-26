@@ -10,14 +10,14 @@ public class RoomObject
 //	private int[] npcs;
 	private int[] items;
 	private int numItems = 0;
-//	private int numNpcs = 0;
-	private final int FIELDS = 5;
+	private final int FIELDS = 6;
 	private final int DIRECTIONS = 8;
 	private final int[] player;
 	
 	private int visibleItems;
 
 	private int[] exits = new int[DIRECTIONS];
+	private int[] collectables;
 
 	public RoomObject(int roomNumber, int[] playerInput)
 	{
@@ -54,6 +54,10 @@ public class RoomObject
 			String exitString = input.nextLine();
 
 			readExits(exitString);
+			
+			String collectString = input.nextLine();
+			
+			readCollectables(collectString);
 
 			input.close();
 
@@ -231,42 +235,67 @@ public class RoomObject
 		String output = "\n\nObvious exits are ";
 		String direction = "";
 		int totalExits = 0;
+		int[] validExits = new int[DIRECTIONS];
 
 		for (int i = 0; i < exits.length; i++)
 		{
-			switch (i)
+			if(exits[i] >= 0 && player[exits[i]] >= 0)
 			{
-				case 0: direction = "North ";
-						break;
-				case 1: direction = "South ";
-						break;
-				case 2: direction = "East ";
-						break;
-				case 3: direction = "West ";
-						break;
-				case 4: direction = "Up ";
-						break;
-				case 5: direction = "Down ";
-						break;
-				case 6: direction = "In ";
-						break;
-				case 7: direction = "Out ";
-						break;
-			}
-
-			if(player[exits[i]+player[12]] >= 0 && exits[i] >= 0)
-			{
-				output += direction;
+				validExits[totalExits] = i;
 				totalExits++;
 			}
 		}
-
-		if(totalExits == 0)
+		
+		if(totalExits > 1)
+		{
+			for (int i = 0; i < totalExits-1; i++)
+			{
+				direction = getDirection(validExits[i]);
+				output+= direction;
+				
+			}
+			
+			output+= "and ";
+			
+			direction = getDirection(validExits[totalExits-1]);
+			
+			output+= direction + ".";
+			
+		}else if (totalExits == 1)
+		{
+			output+=(getDirection(validExits[0]) + "." );
+		}else
 		{
 			output = "\n\nThere is no escape...";
 		}
 
 		return output;
+	}
+
+	private String getDirection(int value) {
+		
+		String direction = "";
+		
+		switch (value)
+		{
+			case 0: direction = "North ";
+					break;
+			case 1: direction = "South ";
+					break;
+			case 2: direction = "East ";
+					break;
+			case 3: direction = "West ";
+					break;
+			case 4: direction = "Up ";
+					break;
+			case 5: direction = "Down ";
+					break;
+			case 6: direction = "In ";
+					break;
+			case 7: direction = "Out ";
+					break;
+		}
+		return direction;
 	}
 
 	public void readExits(String exitString)
@@ -281,6 +310,29 @@ public class RoomObject
 		}
 	}
 
+	public void readCollectables(String collectableString)
+	{
+		String[] rawCol = new String[100];
+		Pattern p = Pattern.compile(":");
+		rawCol = p.split(collectableString, 0);
+
+		
+		if (Integer.parseInt(rawCol[0]) != 0)
+		{
+			
+			collectables = new int[Integer.parseInt(rawCol[0])];
+			
+			for (int i = 0; i < collectables.length; i++)
+			{
+				collectables[i] = Integer.parseInt(rawCol[i]);
+			}
+		}else
+		{
+			collectables = new int[1];
+			collectables[0] = -1;
+		}
+	}
+	
 	public int getState(int itemFlag)
 	{
 		if (player[player[10]+itemFlag] >= 0)
@@ -297,6 +349,25 @@ public class RoomObject
 		}
 
 		return Math.abs(itemFlag);
+	}
+	
+	public int findCollectable (int type)
+	{
+		int address = -1;
+		
+		if(collectables[0] > 0)
+		{
+			for (int i = 0; i < collectables.length; i++)
+			{
+				if (player[collectables[i]] == type)
+				{
+					address = collectables[i];
+					i = collectables.length;
+				}
+			}
+		}
+		
+		return address;
 	}
 
 

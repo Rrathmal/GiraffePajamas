@@ -32,8 +32,8 @@ import java.util.Random;
 public class TheAdventure
 {
 	public static Scanner keyboard = new Scanner(System.in);
-	public static int blank_count = 0;
-	public static String saveFile = "save0.gg";
+	private static int blank_count = 0;
+	private static String saveFile = "save0.gg";
 	public static int close_operation = 0;
 	public static boolean debug = false;
 
@@ -44,12 +44,13 @@ public class TheAdventure
 	public static final int STATS = 20;
 	public static final int ITEMS = 200;
 	public static final int SPECIAL = 40;
-	public static final int EXITS = 60;
+	public static final int EXITS = 100;
+	public static final int COLLECTABLES = 150;
 
 	public static final int ENDINGS = 20;
 	public static final int ACHIEVEMENTS = 30;
 
-	public static int FLAGS = STATS+ITEMS+SPECIAL+EXITS;
+	public static int FLAGS = STATS+ITEMS+SPECIAL+EXITS+COLLECTABLES;
 
 	public static int[] player = new int[FLAGS];
 	public static int[] player2 = new int[ENDINGS+ACHIEVEMENTS];
@@ -70,6 +71,7 @@ public class TheAdventure
 		player[10] = STATS;
 		player[11] = STATS + ITEMS;
 		player[12] = STATS + ITEMS + SPECIAL;
+		player[16] = STATS + ITEMS + SPECIAL + EXITS;
 
 		says("1) New Game 2) New Game (No Intro) 3) Load 4) boatcat\n");
 		System.out.print(">");
@@ -278,6 +280,58 @@ error messages if it's not valid.
 				}else if (text.charAt(i) == '^')
 				{
 					pressAnyKeyToContinue();
+				}else if (text.charAt(i) == '`')
+				{
+					if (i+1 < text.length() && text.charAt(i+1) == '`')
+					{
+						i+=2;
+						String[] values = {"", ""};
+						int reads = 0;
+						
+						while (reads < 2)
+						{
+							i++;
+							if (text.charAt(i) == ' ')
+							{
+								reads++;
+							}else
+							{
+								values[reads]+= text.charAt(i);
+							}
+						}
+						
+						try
+						{
+							
+							//This is the part that ACTUALLY CHECKS if the two values are equal
+							//Skips past all non '`' symbols if they are not.
+							
+							
+							if (player[Integer.parseInt(values[0])] != Integer.parseInt(values[1]))
+							{
+								while(i < text.length() && text.charAt(i) != '`' )
+								{
+									i++;
+								}
+								
+								if (i < text.length() && text.charAt(i) == '`')
+								{
+									i--;
+								}
+							}
+							
+							
+						}catch (NumberFormatException e)
+						{
+							says("That's not a number...");
+						}
+						
+					}else
+					{
+						if(!debug)
+							Thread.sleep(text_speed);
+						System.out.print("Text at second: " + text.charAt(i+1));
+					}
 				}else
 				{
 					if(!debug)

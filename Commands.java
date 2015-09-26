@@ -45,7 +45,7 @@ public class Commands extends TheAdventure
 		{
 			//If the item does not contain a custom attack message, this will display the default "break" actions.
 
-			if (customVerb("attack"))
+			if (!(customVerb("attack")))
 			{
 				attack();
 			}
@@ -72,7 +72,10 @@ public class Commands extends TheAdventure
 			use();
 		}else if(first.equals("flip"))
 		{
-			flip();
+			if (!(customVerb("flip")))
+				{
+					flip();
+				}
 		}else if(first.equals("2+2"))
 		{
 			says("Nope.");
@@ -244,43 +247,99 @@ public class Commands extends TheAdventure
 	The get command!
 
 	*/
-	public static void get()
+	private static void get()
 	{
-		ItemObject target;
-		int itemNumber = itemLookup();
-		int stateOffset = -1;
-
-		if (itemNumber >= 0)
+		
+		if (god.getWord(1).equals("shirt") || god.getWord(1).equals("hat") || god.getWord(1).equals("dress") || god.getWord(1).equals("belt") || god.getWord(1).equals("boot") || god.getWord(1).equals("panda"))
 		{
-			target = new ItemObject(itemNumber, player);
-			int location = target.getLocation();
+			getCollectable();
+		}else
+		{
+			ItemObject target;
+			int itemNumber = itemLookup();
+			int stateOffset = -1;
+			
 
-			if (location < 0)
+			if (itemNumber >= 0)
 			{
-				says("You drop the " + target.getName() + " and pick it up again. Yep, you already had it in your inventory.");
-			}else if (compareLocation(target) == 0 && getState(itemNumber) != 5 && (target.isType("i") || (target.isType("l"))))
-			{
-				if (getState(itemNumber) == 3)
+				target = new ItemObject(itemNumber, player);
+				int location = target.getLocation();
+
+				if (location < 0)
 				{
-					stateOffset = -3;
-				}else if (getState(itemNumber) == 4)
+					says("You drop the " + target.getName() + " and pick it up again. Yep, you already had it in your inventory.");
+				}else if (compareLocation(target) == 0 && getState(itemNumber) != 5 && (target.isType("i") || (target.isType("l"))))
 				{
-					stateOffset = -4;
+					if (getState(itemNumber) == 3)
+					{
+						stateOffset = -3;
+					}else if (getState(itemNumber) == 4)
+					{
+						stateOffset = -4;
+					}
+
+					says("You pickup the " + target.getNameState() + ".");
+					player[(player[10]+itemNumber)] = stateOffset;
+
+				}else
+				{
+					says("Try as you may, but I have no idea what you were trying to aquire there.");
 				}
-
-				says("You pickup the " + target.getNameState() + ".");
-				player[(player[10]+itemNumber)] = stateOffset;
-
 			}else
 			{
 				says("Try as you may, but I have no idea what you were trying to aquire there.");
 			}
-		}else
-		{
-			says("Try as you may, but I have no idea what you were trying to aquire there.");
 		}
 	}
 
+
+	private static void getCollectable() 
+	{
+		int type = -1;
+		String output = "";
+		
+		switch(god.getWord(1))
+		{
+			case "shirt": type = 1;
+				break;
+			case "dress": type = 2;
+				break;
+			case "hat": type = 5;
+				break;
+			case "belt": type = 3;
+				break;
+			case "boot": type = 4;
+				break;
+		}
+		
+		int address = thisRoom.findCollectable(type);
+		
+		if (address > 0)
+		{
+			player[address] = 0;
+			player[(3+type)]+=1;
+			output+= "You find a " + god.getWord(1) + " and put it on. ";
+			
+			switch(god.getWord(1))
+			{
+				case "shirt": output+= "You feel much cooler now. Figuratively of course.@@@@@@@@ In truth this thing breeths like a loaf of bread.";
+					break;
+				case "dress": output+= "Your ability to block bullets has increased!";
+					break;
+				case "hat": output+= "Your gentlemanly rating has increased!@@@@@ You're still in the negatives regarding that however.";
+					break;
+				case "belt": output+= "Your heroics have increased by further tightening your waist line!";
+					break;
+				case "boot": output+= "You put on another boot?@@@@ Must have been a pretty big boot.";
+					break;
+			}
+		}else
+		{
+			output+="Scour and search as you may, you can't find one lying around.";
+		}
+		
+		says(output);
+	}
 
 	/**
 	DEBUG COMMAND. Changes the player values to a specified value.
@@ -413,17 +472,43 @@ public class Commands extends TheAdventure
 			{
 				switch (getState(itemNumber))
 				{
-					case 0: says("You take a deep breath an --HHHGGGGRRRRAAAAAAGGGGGAAAHHHAHGAHGAGAHAAGAHGAAHAAAAAA!!!! You flip the living (or possibly not) beejesus's out of the " + table.getName() + ".\nYour RAGE has decreased by 1.");
-							player[player[player[10]+itemNumber]] = TheAdventure.thisRoom.getNumber()+100;
+					case 0: says("You take a deep breath and --HHHGGGGRRRRAAAAAAGGGGGAAAHHHAHGAHGAGAHAAGAHGAAHAAAAAA!!!! You flip the living (or possibly not) beejesus's out of the " + table.getName() + ".\nYour RAGE has decreased by 1.");
+							player[player[10]+itemNumber] = TheAdventure.thisRoom.getNumber()+100;
+							player[9]+=1;
+							player[15]-=1;
 							break;
-					case 1: says("You take a deep breath an --H@H@H@@@@@@@@@@@@@@ Oh wait a minute, @@@@@you already flipped this over.@@@@@Thinking calmly for a second, you take the " + table.getName() + " and set it back up.@@@@ Or set it to whatever a \"non-flipped\" position would be.");
-							player[player[player[10]+itemNumber]] = TheAdventure.thisRoom.getNumber()-100;
+					case 1: says("You take a deep breath and --H@H@H@@@@@@@@@@@@@@ Oh wait a minute, @@@@@you already flipped this over.@@@@@@@ Thinking calmly for a second, you take the " + table.getName() + " and set it back up.@@@@ Or @@@@set it to whatever a \"non-flipped\" position would be.");
+							unflip(table);
 							break;
-					case 2: 
+					case 2: says("You take a deep breath and --HHHGGGGRRRRAAAAAAGGGGGAAAHHHAHGAHGAGAHAAGAHGAAHAAAAAA!!!! You flip the living (or possibly not) beejesus's out of the " + table.getName() + ".\nYour RAGE has decreased by 1.");
+							player[player[10]+itemNumber] = TheAdventure.thisRoom.getNumber()+100;
+							player[9]+=1;
+							player[15]-=1;
+							break;
+					case 3:	says("You take a deep breath and --H@H@AAAAAA!!!!!!!@@@@@@@@@@@\n\nYou flip one of the broken peices into the air!@@@@\n\nIt does one\n\n@@No two@@@@,\n\nHoly moley!@@@ \n\n17 consecutive flips before stciking the landing perfectly!@@@@@@\nThe crowd goes wild!!@@@@@@@@\nLadies and gentlemen@@ what you've seen here will be remembered for generations!@@@@@@@@\n\n(Not really,@@@ also it's still broken)");
+							break;
+					case 4: says("You take a deep breath and --HHHGGGGRRRRAAAAAAGGGGGAAAHHHAHGAHGAGAHAAGAHGAAHAAAAAA!!!! You flip the living (or possibly not) beejesus's out of the " + table.getName() + ".\nYour RAGE has decreased by 1. Also it's still locked.");
+							player[player[10]+itemNumber] = TheAdventure.thisRoom.getNumber()+100;
+							break;
+					default: says("Wait, what?");
 				}
 			}
 		}
 		
+	}
+	
+	private static void unflip(ItemObject table)
+	{
+		if(table.isType("i") || table.isType("p"))
+		{
+			player[table.p()] = thisRoom.getNumber();
+		}else if (table.isType("f"))
+		{
+			player[table.p()] = thisRoom.getNumber() + 200;
+		}else if (table.isType("l"))
+		{
+			player[table.p()] = thisRoom.getNumber() + 400;
+		}
 	}
 	
 	/* Old code. Archived becasue I'm an idiot
@@ -472,7 +557,7 @@ public class Commands extends TheAdventure
 	public static void toss()
 	{
 		ItemObject arrow;
-		ItemObject target;
+		//ItemObject target;
 		int itemNumber = itemLookup();
 
 
@@ -572,13 +657,18 @@ public class Commands extends TheAdventure
 	@param String The verb name.
 	 The processed player input.
 	*/
+	
+	/*Error message reporting due to the verb not being present on the item presented is up to the command
+		for handling what needs to be said. AKA if I don't write a tailored message to the command, the 
+		console will just report nothing.*/
+	
 	public static boolean customVerb(String verb)
 	{
 		ItemObject arrow;
 		ItemObject target;
 		int firstItem = -1;
 		int secondItem = -1;
-		boolean invalid = true;
+		boolean valid = false;
 
 		says();
 
@@ -620,8 +710,7 @@ public class Commands extends TheAdventure
 
 				if (secondItem >= 0)
 				{
-					ItemEvents.itemVerbEvents(verb, arrow, target);
-					invalid = false;
+					valid = ItemEvents.itemVerbEvents(verb, arrow, target);
 				}
 			}else
 			{
@@ -629,10 +718,9 @@ public class Commands extends TheAdventure
 			}
 		}else
 		{
-			says("You're angry, I get that. But no matter how hard you try you can't " + verb + " " + god.getWord(1) + " because it doesn't exist!");
 		}
 
-		return invalid;
+		return valid;
 	}
 
 	/**
@@ -719,26 +807,23 @@ public class Commands extends TheAdventure
 		{
 			int destination = thisRoom.getExit(direction);
 
-			if (destination > -1)
+			if (destination > -1 && player[destination] >= 0)
 			{
 				says("You go " + second + ".");
-				says();
-				player[1] = destination;
+				says("@@@@");
+				player[1] = player[destination];
 				buildRoom();
-			}else if(destination == -1)
+			}else if(destination < 0 || player[destination] == -1)
 			{
 				says("It seems to be locked. Closer inspection reveals that it is, indeed, locked.");
-			}else if(destination == -2)
-			{
-				says("Why don't you go " + second + "? Oh right, you can't. destination -2");
 			}else
 			{
-				says("You've been messsing around with values haven't you?");
+				says("You find no way to proceed in that direction. At least not on this plane of existence.");
 			}
 
 		}else
 		{
-			says("Why don't you go " + second + "? Oh right, you can't. direction -1");
+			says("You find no way to proceed in that direction. At least not on this plane of existence.");
 		}
 	}
 
@@ -1209,7 +1294,7 @@ public class Commands extends TheAdventure
 
 			if (loc < 500 && loc > -5)
 			{
-				says("While it takes a bit of effort on your end, you attack and break the " + target.getName() + ". Nice job hero.");
+				says("While it takes a bit of effort on your end, you attack and break the " + target.getName() + ". You feel satisfied. Rage -1.");
 				player[target.p()] = thisRoom.getNumber()+300;
 			}
 		}

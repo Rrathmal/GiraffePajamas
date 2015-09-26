@@ -8,7 +8,7 @@ You sit in the chair.                                                           
 
 2
 //Default equip broken
-You can't equip that, it's broken! Well, I mean you could, but it's not going to do you much good.
+You can't equip that, it's broken! Well, I mean you could, but you're probably going to need to like... glue to yourself or something.
 
 3
 //Use Dio Brando
@@ -44,7 +44,7 @@ You carefully place the lockpick in the box and begin to work your magic...\n\n@
 
 11
 // NEWGAMETEXT - 1
-You begin a new game...@@\n\nYour name is Dio Brando, and while others may know you as 'jerk' or 'asshole' or plethora of other expletives, you don't care. Because you're Dio Brando.\n\nCurrently, and without the knowledge of those lowly followers you call 'your party', you're currently in the middle of an what you believe to be an assassination mission.\n\n^\n\n\nA day ago, you delivered a note in the dead of night. It's contents were as mysterious as the circumstances surrounding it. The written side, clearly printed, read:\n\n    "Jessepeak Thunderdome III II"\n\nWhile the name itself, as absurd as the method derived, it was deadly serious to you, Dio Brando. For the symbol affixed to the corner of a black bird, meant the message itself, was a message of death.\n\n^\n\nSparing not a moment the following morning you made your way into town. While you did not recognize it, the first words 'Jessepeak Thunderdome' seemed obvious as to the name of your target. The other symbols '3' 
+You begin a new game...@@\n\nYour name is Dio Brando, and while others may know you as 'jerk' or 'asshole' or plethora of other explatives, you don't care. Because you're Dio Brando.\n\nCurrently, and without the knowledge of those lowly followers you call 'your party', you're currently in the middle of an what you believe to be an assassination mission.\n\n^\n\n\nA day ago, you delivered a note in the dead of night. It's contents were as mysterious as the circumstances surrounding it. The written side, clearly printed, read:\n\n    "Jessepeak Thunderdome III II"\n\nWhile the name itself, as absurd as the method derived, it was deadly serious to you, Dio Brando. For the symbol affixed to the corner of a black bird, meant the message itself, was a message of death.\n\n^\n\nSparing not a moment the following morning you made your way into town. While you did not recognize it, the first words 'Jessepeak Thunderdome' seemed obvious as to the name of your target. The other symbols '3' 
 
 12
 // NEWGAMETEXT - 2
@@ -56,7 +56,7 @@ with an address and his loose schedule. With another hand greased you nail yours
 
 14
 // NEWGAMETEXT - 4
-Standing up you replace your cloths and take inventory of your belongings. Everything is accounted for, save the one sleeping draught you snuck her in between a kiss. She now lays past out on the guest bed, and you're free to go about your work.@@@@\n\nYOUR MISSION: To kill Jessepeak Thunderdome and escape\n\nRestrictions: None, you are Dio Brando.\n\nAnd that all starts now...\n\n^\n\n
+Standing up you replace your clothes and take inventory of your belongings. Everything is accounted for, save the one sleeping draught you snuck her in between a kiss. She now lays past out on the guest bed, and you're free to go about your work.@@@@\n\nYOUR MISSION: To kill Jessepeak Thunderdome and escape\n\nRestrictions: None, you are Dio Brando.\n\nAnd that all starts now...\n\n^\n\n
 
 15
 // Use guest room dresser
@@ -68,7 +68,7 @@ I mean, I guess you could hide in it if you were ever being chased by giant blue
 
 17
 // Use guest room nightstand
-Forget the nightstand! It's below you!
+Forget the night stand! It's below you!
 
 18
 // Use guest room bed
@@ -88,7 +88,7 @@ Not much you can do with that. Not unless you find a pack of cards and a few dog
 
 22
 // Throw maid (You're a mean one, Mr Dio)
-You pick up the helpless body of the maid and throw her to the ground!\n\n@T@H@U@D@!\n\nShe rolls for a bit before coming to a resting state. While not overjoyed, this does give Dio a small amount of satisfaction. Sick bastard.
+You pick up the helpless body of the maid and throw her to the ground!\n\n@T@H@U@D@!\n\nShe rolls for a bit before coming to a resting state. While not overjoyed, this does give Dio a small amount of satisfaction. Rage -1.
 
 23
 // Nope
@@ -104,8 +104,11 @@ You sit down in the chair.\n\nAnd then you stand back up because you have a miss
 
 26
 // Throw Chair (RIOT END)
+You throw a chair. Suddenly the whole house is swarmed with angry barter ladies and the entire population of Baltimore. You have started a riot in the manor @@@@@--GAME@@@@@ OVER. \n\n\nEnding 1: Throw 2 chairs next time. (Spoiler: you can't!) 
 
-
+27
+// Flip candlestick
+You flip the candle stick over. `` 262 -2 You hear a clicking sound as a hatch is released from the ceiling, sending a step latter flying your way!@@@@@@@ You dodge fabulously of course.`` 262 4 Nothing happens.
 
 
 

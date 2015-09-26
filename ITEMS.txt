@@ -82,7 +82,7 @@ null
 9
 guest room wardrobe
 ;wardrobe;
-A rather ornate wooden wardrobe for storing larger pieces of cloths. You wonder what a peacedrobe would look like...
+A rather ornate wooden wardrobe for storing larger pieces of cloths. You wonder what a peacedrobe would look like...`` 360 1 \nYou see a shirt. `` 361 2 \nYou see a dress. `` 362 3 \nYou see a belt.
 f
 T 0 e 16
 :null:
@@ -142,7 +142,14 @@ T 0 e 25
 :throw:
 T 0 
 
-
+16
+candlestick
+;candle;switch
+One of the candlesticks that lines the walls of the upstairs. There's quite a few, but reffering to them as one is more convinient. 
+f
+T 0
+:flip:attack
+:T 0 e 27 p 262 11::
 
 
 
@@ -178,7 +185,7 @@ T 0
 //Value Commands
 // -------------
 //c - copy's one value to another (c 0 1) (c ORIGIN DESTINATION)
-//p - change player flag (0 p 1 10) -> (player[1] = 10)
+//p - change player value (0 p 1 10) -> (player[1] = 10)
 //h - health mod, + or - (h + 1) (Adds 1 hp)
 //t = sets the text speed (t 13) (text_speed = player[13]) (player[13] = Player selected speed, player[14] = Event speed)
 // ------------

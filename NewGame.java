@@ -5,9 +5,21 @@ public class NewGame
 	public NewGame(int arraysize)
 	{
 		player = new int[arraysize];
-		//Not all values need to be initialiased, and in fact, it's much more efficient
+		//Not all values need to be initialized, and in fact, it's much more efficient
 		//to save the headache of writing them all out and only initialize the few that
-		//are necessary (ie: Starting itmes, Location, Locked doors, NPC status)
+		//are necessary (ie: Starting items, Location, Locked doors, NPC status)
+		
+		/*
+		 * 
+		 * Player values
+		 * 
+		 * CURRENTLY 0-19
+		 * 
+		 * Various stored values pertaining to player actions. Mostly synonymous with special.
+		 * 
+		 * 
+		 */
+		
 
 		player[0] = 0; 	//No idea what this is going to be for yet. It probably won't change ever.
 		player[1] = 0; 	//Player location.
@@ -26,6 +38,9 @@ public class NewGame
 
 		player[13] = 15;//Text speed
 		player[14] = 22;//Event text speed
+		player[15] = 0;	//RAGE
+		
+		l(player[16]);	//COLLECTABLE OFFSET //Off set itself because I'm lazy
 
 		/*
 
@@ -44,7 +59,7 @@ public class NewGame
 		200+ Map Location (Stationary)
 		300+ Map Location (Broken)
 		400+ Map Location (Locked)
-		500+ Map Location (Non-accessable)
+		500+ Map Location (Non-accessible)
 
 		*/
 
@@ -70,6 +85,7 @@ public class NewGame
 		player[33] = 501;	//Maid			: Guest Room
 		player[34] = 501;	//Dead maid D:  : Guest Room
 		player[35] = 201;	//GR Chair		: Guest Room
+		player[36] = 202;	//Candlestick	: U manor foyer
 
 		/*
 
@@ -88,7 +104,7 @@ public class NewGame
 
 		Exits
 
-		CURRENTLY 260-319
+		CURRENTLY 260-359
 
 		Location values for room exits.
 		With the exception of:
@@ -96,14 +112,53 @@ public class NewGame
 		-1 : Locked
 		-2 : Invisible
 		-3 : God help you what did you do
+		
+		OK. I think I remembered how this worked. The value stored here refers to the location to travel to, whereas the value
+		in the LISA file just refers to the address here.
 
 		*/
 
 		player[260] = -2;	//Room 0 exit up: 	Room 0	: Universal null exit
-		player[261] = 2;	//GuestBedroom 	: West exit
-		player[262] = -2;	//
-		player[263] = -2;	//
-		player[264] = -2;	//
+		player[261] = 2;	//GuestBedroom1 : West exit
+		player[262] = -2;	//MFUE	up		: Locked (Attic)
+		player[263] = 3;	//MFUE	down	: manor foyer D
+		player[264] = 4;	//MFUE	north	: UEC
+		player[265] = 13;	//MFUE	west	: UFW
+		player[266] = 1;	//MFUE	east	: GB1
+		player[267] = 2;	//MFD	up		: MFUE
+		player[268] = 2;	//UEC	south	: MFUE
+		player[269] = 6;	//MFUE 	in		: study
+		player[270] = 13;	//study	out		: MFUW
+		player[271] = 1;
+		player[272] = 1;
+		
+		
+		/*
+		 
+		 Collectables
+		 
+		 Currently 360-409
+		 
+		 Status and determining number for what specific collectables are.
+		 Unlike items, they're value is not for a location but for which item it is.
+		 
+		 -1: Destroyed
+		 0 : Aquired
+		 1 : Shirt
+		 2 : Dress
+		 3 : Belt
+		 4 : Boots
+		 5 : Hat
+		 6 : Small furry animal
+		 
+		 These values are to be referenced by rooms in order to display in look statements when a collectable is available.
+		 
+		 
+		 */
+		
+		player[360] = 1;
+		player[361] = 2;
+		player[362] = 3;
 
 	}
 

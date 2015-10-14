@@ -82,6 +82,9 @@ public class Commands extends TheAdventure
 		}else if(first.equals("achievements") || first.equals("endings") || first.equals("ending"))
 		{
 			displaySession();
+		}else if(first.equals("save"))
+		{
+			saveGame();
 		}else
 		{
 			says("Command unrecognized: " + first);
@@ -779,6 +782,7 @@ public class Commands extends TheAdventure
 		String second = god.getWord(1);
 		int direction = -1;
 
+		//Space ending. Currently does not end the game
 		if (second.equals("space"))
 		{
 			ItemEvents.displayEvent(0);
@@ -810,8 +814,17 @@ public class Commands extends TheAdventure
 			if (destination > -1 && player[destination] >= 0)
 			{
 				says("You go " + second + ".");
+				
+				//Stall printing in the console by 4 letters
 				says("@@@@");
+				
+				//Change the location of the player
 				player[1] = player[destination];
+				
+				//Increase the time by 1 minute
+				timeTravel(); 
+				
+				//Rebuild room
 				buildRoom();
 			}else if(destination < 0 || player[destination] == -1)
 			{
@@ -831,6 +844,7 @@ public class Commands extends TheAdventure
 	{
 		close_operation = -1;
 	}
+	
 
 	/**
 	Looks up and prints the toString method for a given item in a PlayerCommand

@@ -110,6 +110,9 @@ You throw a chair. Suddenly the whole house is swarmed with angry barter ladies 
 // Flip candlestick
 You flip the candle stick over. `` 262 -2 You hear a clicking sound as a hatch is released from the ceiling, sending a step latter flying your way!@@@@@@@ You dodge fabulously of course.`` 262 4 Nothing happens.
 
+28
+// Read switch book
+You open the book up, and flip through the pages only to find nothing written on any of them, save for a large a conspicuous red button taking up almost all of the inside.\n\n Eh, 7/10, you've read better.
 
 
 //Event Number

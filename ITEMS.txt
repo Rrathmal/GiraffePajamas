@@ -151,13 +151,27 @@ T 0
 :flip:attack
 :T 0 e 27 p 262 11::
 
+17
+witch-doctor
+;witch-doctor;witch doctor;which doctor;doctor;witch
+A quite looking witch-doctor, clad in exactly what you would expect a witch-doctor to be wearing (Unless that's nothing, because he is wearing something).
+f
+T 0
+:flip:attack:talk
+:T 0 e 27 p 262 11::
 
+18
+book with 10/10 writing
+;book;switch book;
+A deep a moving tale of nothing.
+i
+T 0 e 28 p 39 206
 
-
-
-
-
-
+19
+red button
+;button;red button;switch;
+A red button sitting at the center of a book. Like all red buttons, it probably doesn't do anything; being hidden inside of a book doubly so.
+f
 
 
 

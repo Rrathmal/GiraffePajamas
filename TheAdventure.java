@@ -348,8 +348,6 @@ error messages if it's not valid.
 	}
 
 
-
-
 	public static void says()
 	{
 		System.out.println();
@@ -368,7 +366,7 @@ error messages if it's not valid.
 	/**
 	Lists, verifies, and attempts to load player values from a file.
 	*/
-	public static void loadGame() throws IOException
+	private static void loadGame() throws IOException
 	{
 		File folder = new File(".");
 		File[] fileList = folder.listFiles();
@@ -417,23 +415,30 @@ error messages if it's not valid.
 	Outputs the player value array into a file to be loaded at a later time.
 	*/
 
-	public static void saveGame() throws IOException
+	public static void saveGame() //throws IOException
 	{
-		PrintWriter output = new PrintWriter(saveFile);
+		try{
+			PrintWriter output = new PrintWriter(saveFile);
 
-		/*
-		for (int i = 0; i < player.length; i++)
-		{
-			player[i]= i+1;
+			/*
+			for (int i = 0; i < player.length; i++)
+			{
+				player[i]= i+1;
+			}
+			*/
+
+			for (int i = 0; i < player.length; i++)
+			{
+				output.println(player[i]);
+			}
+
+			output.close();
+			
+			says("The game has been saved in slot " + saveFile + ". Maybe.");
+		} catch(IOException e){
+			says("The game has not been saved. Reason: Cannot write to file.");
 		}
-		*/
-
-		for (int i = 0; i < player.length; i++)
-		{
-			output.println(player[i]);
-		}
-
-		output.close();
+		
 	}
 
 	/**
@@ -441,7 +446,7 @@ error messages if it's not valid.
 	@param String The name of the file to load from.
 	*/
 
-	public static void buildCharacter(String filename) throws IOException
+	private static void buildCharacter(String filename) throws IOException
 	{
 		File file = new File(filename);
 		boolean valid = validSave(filename);
@@ -704,4 +709,36 @@ error messages if it's not valid.
 			says("File not found SESSION.txt");
 		}
 	}
+	
+	public static String getTime(){
+		String period = "am";
+		int time = player[17];
+		
+		if (time >= 720){
+			period = "pm";
+			if (time >=780){
+				time-=720;
+			}
+		}
+		
+		return (time/60) + ":" + (time%60) + period;
+	}
+	
+	public static void timeTravel(){
+		player[17] = player[17] + 1;
+		timeCheck();
+	}
+	
+	public static void timeTravel(int time){
+		player[17] = player[17] + time;
+		timeCheck();
+	}
+	
+	private static void timeCheck(){
+		if (player[17] > 1440){
+			player[17] = player[17] - 1440;
+		}
+	}
+	
+	
 }

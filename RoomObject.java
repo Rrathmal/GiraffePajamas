@@ -30,7 +30,6 @@ public class RoomObject
 		{
 			file = new File("LISA.txt");
 			input = new Scanner(file, "UTF-8");
-			exits = new int[DIRECTIONS];
 
 			//Skips to the room entry
 			for (int i = 0; i < roomNumber * FIELDS; i++)
@@ -229,17 +228,24 @@ public class RoomObject
 	{
 		return exits[exitDirection];
 	}
+	
+	private String roomName(int number){
+		
+		RoomObject lookup = new RoomObject(number, player);
+		return lookup.name;
+	}
+	
 
-	public String readExits()
+	private String readExits()
 	{
-		String output = "\n\nObvious exits are ";
+		String output = "\n\nObvious exits are: ";
 		String direction = "";
 		int totalExits = 0;
 		int[] validExits = new int[DIRECTIONS];
 
 		for (int i = 0; i < exits.length; i++)
 		{
-			if(exits[i] >= 0 && player[exits[i]] >= 0)
+			if(exits[i] >= 0 && player[exits[i]] >= 0) //Possible syntax issue relative to invisible exits. Will address later
 			{
 				validExits[totalExits] = i;
 				totalExits++;
@@ -250,20 +256,20 @@ public class RoomObject
 		{
 			for (int i = 0; i < totalExits-1; i++)
 			{
-				direction = getDirection(validExits[i]);
+				direction = "\n\t" +getDirection(validExits[i]) + "to the " + roomName(player[exits[validExits[i]]]);
 				output+= direction;
 				
 			}
 			
-			output+= "and ";
+			output+= "\n\t";
 			
-			direction = getDirection(validExits[totalExits-1]);
-			
-			output+= direction + ".";
+			direction = getDirection(validExits[totalExits-1]) + "to the " + roomName(player[exits[validExits[totalExits-1]]]);
+			 
+			output+= direction;
 			
 		}else if (totalExits == 1)
 		{
-			output+=(getDirection(validExits[0]) + "." );
+			output+=("\n\t" + getDirection(validExits[0]) + "to the " + roomName(player[exits[validExits[0]]]));
 		}else
 		{
 			output = "\n\nThere is no escape...";
@@ -278,21 +284,21 @@ public class RoomObject
 		
 		switch (value)
 		{
-			case 0: direction = "North ";
+			case 0: direction = "[North] ";
 					break;
-			case 1: direction = "South ";
+			case 1: direction = "[South] ";
 					break;
-			case 2: direction = "East ";
+			case 2: direction = "[East] ";
 					break;
-			case 3: direction = "West ";
+			case 3: direction = "[West] ";
 					break;
-			case 4: direction = "Up ";
+			case 4: direction = "[Up] ";
 					break;
-			case 5: direction = "Down ";
+			case 5: direction = "[Down] ";
 					break;
-			case 6: direction = "In ";
+			case 6: direction = "[In] ";
 					break;
-			case 7: direction = "Out ";
+			case 7: direction = "[Out] ";
 					break;
 		}
 		return direction;
@@ -373,7 +379,7 @@ public class RoomObject
 
 	public String toString()
 	{
-		String output = ("You are in " + name + ".\n\n" + description + "." +
+		String output = ("You are in " + name + ".\nTime: " + TheAdventure.getTime() + "\n\n" + description + "." +
 						getItems() + readExits());
 
 		return output;

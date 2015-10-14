@@ -7,49 +7,49 @@ A room to test / break shit. The whole environment is very... imaginary.
 1
 guest bedroom
 One of the spare bedrooms in The Thunderdome. The room is extravagantly decorated top to bottom with everything you would expect from a bourgeois merchant. Now if only the wealth put into this room wasn't nailed to the ground. \n\nAlong the north wall is a dresser and wardrobe set, in compliment with the night stand in the corner. On the east wall sits a bed next to two windows, and a small table sits nearby in the other corner. The only door leading in or out of this room is on the west wall, and it leads back to the hallway.
--2:-2:-2:261:-2:-2:-2:-2:
+-2:-2:-2:261:-2:-2:-2:275:
 3:360:361:362:
 
 2
 upstairs manor foyer east side
-Yep, you really can't get any worse than this.
-264:-2:266:265:262:263:269:-2:
+Elegant paintings and candlesticks line the hallway of the upper foyer that's to large to fit into one room. The crown molding in particular makes you feel all murdery.
+264:274:266:265:262:263:269:-2:
 0::
 
 3
 downstairs manor foyer
 Noooooooooooooooooooooooooooooooooo
--2:-2:-2:-2:267:-2:-2:-2:
+-2:-2:273:-2:267:-2:-2:-2:
 0::
 
 4
 upper eastern corridor
 D
--2:268:-2:-2:-2:-2:-2:-2:
+278:268:277:-2:-2:-2:-2:276:
 0::
 
 5
 upper western corridor
 D
--2:-2:-2:-2:-2:-2:-2:-2:
+-2:280:-2:279:-2:-2:-2:276:
 0::
 
 6
 study
 D
--2:-2:-2:-2:-2:-2:-2:270:
+-2:270:-2:-2:-2:-2:-2:-2:
 0::
 
 7
 guest bedroom
 D
--2:-2:-2:-2:-2:-2:-2:-2:
+-2:-2:-2:281:-2:-2:-2:275:
 0::
 
 8
 bathroom
 D
--2:-2:-2:-2:-2:-2:-2:-2:
+-2:-2:-2:282:-2:-2:-2:276:
 0::
 
 9
@@ -78,16 +78,51 @@ D
 
 13
 upstairs manor foyer west side
+Elegant paintings and candlesticks line the hallway of the upper foyer that's to large to fit into one room. The west side seems to be differ in painting count from the east, making you feel particularly murdery.
+-2:-2:-2:-2:-2:-2:-2:-2:
+0::
+
+14
+downstairs parlor
+A room for "relaxation", or what you would assume so with it's array of stiff furniture and stark colors: Unfortunetly all of which is nailed to the floor or on fire if you count the fireplace. This guy must really love his relatives. `` 37 214 You see a witch-doctor standing in the corner.
+-2:-2:-2:271:-2:-2:-2:-2:
+0::
+
+15
+courtyard south side
 D
 -2:-2:-2:-2:-2:-2:-2:-2:
 0::
 
+16
+courtyard north side
+D
+-2:-2:-2:-2:-2:-2:-2:-2:
+0::
 
+17
+trophy room
+D
+-2:-2:-2:283:-2:-2:-2:-2:
+0::
 
+18
+master closet
+D
+-2:-2:-2:-2:-2:-2:-2:-2:
+0::
 
+19
+servants stairs
+D
+-2:-2:-2:-2:-2:-2:-2:-2:
+0::
 
-
-
+20
+name
+D
+-2:-2:-2:-2:-2:-2:-2:-2:
+0::
 
 
 

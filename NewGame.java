@@ -41,6 +41,7 @@ public class NewGame
 		player[15] = 0;	//RAGE
 		
 		l(player[16]);	//COLLECTABLE OFFSET //Off set itself because I'm lazy
+		player[17] = 870;//Time. Measured in minutes because anything else is hard. 870 by default for 2:30pm
 
 		/*
 
@@ -86,6 +87,9 @@ public class NewGame
 		player[34] = 501;	//Dead maid D:  : Guest Room
 		player[35] = 201;	//GR Chair		: Guest Room
 		player[36] = 202;	//Candlestick	: U manor foyer
+		player[37] = 214;	//Witch-Doctor	: Parlor
+		player[38] = 6;		//Book(switch)	: Study
+		player[39] = 506;	//RedButton		: Study
 
 		/*
 
@@ -119,8 +123,8 @@ public class NewGame
 		*/
 
 		player[260] = -2;	//Room 0 exit up: 	Room 0	: Universal null exit
-		player[261] = 2;	//GuestBedroom1 : West exit
-		player[262] = -2;	//MFUE	up		: Locked (Attic)
+		player[261] = 2;	//GB1	west	: MFUE
+		player[262] = -2;	//MFUE	up		: Attic (Invisible)
 		player[263] = 3;	//MFUE	down	: manor foyer D
 		player[264] = 4;	//MFUE	north	: UEC
 		player[265] = 13;	//MFUE	west	: UFW
@@ -128,9 +132,21 @@ public class NewGame
 		player[267] = 2;	//MFD	up		: MFUE
 		player[268] = 2;	//UEC	south	: MFUE
 		player[269] = 6;	//MFUE 	in		: study
-		player[270] = 13;	//study	out		: MFUW
-		player[271] = 1;
-		player[272] = 1;
+		player[270] = 13;	//study	south	: MFUW
+		player[271] = 3;	//ParlorWest	: MFD
+		player[272] = 1;	//MFUE	south	: GB2
+		player[273]	= 14;	//MFD	east	: Parlor
+		player[274] = 7;	//MFUE  south	: GB2
+		player[275] = 15;	//All S windows : Courtyard SS
+		player[276] = 16;	//All N Windows : Courtyard NS
+		player[277] = 17;	//UEC	east	: Trophy Room
+		player[278] = 8;	//UEC 	north	: Bathroom UP
+		player[279] = 19;	//UWC	west	: Servants stairs
+		player[280] = 13;	//UWC	south	: MFUW
+		player[281] = 11;	//GB2	west	: MFUE
+		player[282] = 4;	//BR	west	: UEC
+		player[283] = 4;	//TR	west	: UEC
+		
 		
 		
 		/*
@@ -142,7 +158,8 @@ public class NewGame
 		 Status and determining number for what specific collectables are.
 		 Unlike items, they're value is not for a location but for which item it is.
 		 
-		 -1: Destroyed
+		 -2: Destroyed
+		 -1: Hidden
 		 0 : Aquired
 		 1 : Shirt
 		 2 : Dress
